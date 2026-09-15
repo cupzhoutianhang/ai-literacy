@@ -40,12 +40,6 @@
 - 只想快速了解某个能力, 可以直接看对应讲次的"总结"与"随堂快测"几页。
 - 课件中的价格、显存、耗时等数字大多标注为"示意", 用于说明数量级; 各平台的实际价格与功能以其官方文档为准。
 
-## 内容来源与致谢
-
-- 各讲内容以微信公众号合集《轻松读懂 AI 大模型》的 11 篇文章为主线整理扩充, 标注"原文配图"的图片来自对应文章, 版权归原作者所有。
-- 课件版式基于南京大学魏恒峰老师《编译原理》课程的 LaTeX Beamer 模板 ([courses-at-nju-by-hfwei/compilers-lectures](https://github.com/courses-at-nju-by-hfwei/compilers-lectures), MIT License)。
-- 部分照片与插图来自 Wikimedia Commons (公有领域或 CC BY / CC BY-SA 授权)。
-
 ## 使用说明
 
 课件仅供教学与学习使用。转载或在课堂中使用, 请注明出处。
