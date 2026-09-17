@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人工智能通识 (2026 秋季学期)</title>
+<meta name="description" content="人工智能通识 · 面向大一碳储科学与工程、石油工程专业的 AI 大模型通识课 · 中国石油大学 (北京)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛢️</text></svg>">
+<style>
+  :root {
+    --bg: #f3f4f7;
+    --paper: #ffffff;
+    --ink: #1f2330;
+    --muted: #6b7080;
+    --line: #e4e6ec;
+    --link: #3b3fa8;
+    --accent: #b3261e;
+    --shadow: 0 1px 2px rgba(20, 24, 40, .06), 0 8px 24px rgba(20, 24, 40, .06);
+    --note-bg: #eef3ff; --note-line: #c9d6f5;
+    --t1: #fde2e1; --t1i: #9b2c24;   /* 认识模型 */
+    --t2: #fff1cc; --t2i: #7a5a00;   /* 用起来 */
+    --t3: #dcf3e4; --t3i: #1f6b3a;   /* 连接世界 */
+    --t4: #e3ecff; --t4i: #2c4a9b;   /* 智能体 */
+    --t5: #f1e4ff; --t5i: #6a3a9b;   /* 定制 */
+    --t6: #e2f4f7; --t6i: #1f6470;   /* 工程化 */
+    --hand: "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Songti SC", serif;
+    --sans: -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    --mono: "JetBrains Mono", "Cascadia Code", Consolas, "Courier New", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161c; --paper: #1c1f27; --ink: #e6e7ec; --muted: #9a9fb0; --line: #2c303b;
+      --link: #9fa6ff; --accent: #ff8a80; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+      --note-bg: #1f2a44; --note-line: #34467a;
+      --t1: #4a2523; --t1i: #ffb4ab; --t2: #45391a; --t2i: #ffd978; --t3: #1e3b2a; --t3i: #8fe0aa;
+      --t4: #22304f; --t4i: #a9c1ff; --t5: #35264a; --t5i: #d7b6ff; --t6: #1d3a40; --t6i: #8fd8e4;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.75 var(--sans); }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 顶栏 */
+  .bar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 92%, transparent);
+         backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  .bar-in { max-width: 1040px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .brand { font-family: var(--hand); font-size: 20px; color: var(--ink); font-weight: 700; }
+  .brand small { font-family: var(--sans); font-size: 12px; color: var(--muted); font-weight: 400; margin-left: 4px; letter-spacing: .08em; }
+  .sep { width: 1px; height: 18px; background: var(--line); }
+  .bar-link { font-size: 14px; color: var(--ink); font-weight: 600; }
+  .bar-right { margin-left: auto; font-size: 13px; }
+
+  /* 纸张 */
+  .wrap { padding: 28px 16px 48px; }
+  .paper { max-width: 780px; margin: 0 auto; background: var(--paper); box-shadow: var(--shadow);
+           border-radius: 3px; padding: 44px clamp(20px, 5vw, 56px) 36px; }
+  h1 { font-size: clamp(26px, 4.4vw, 34px); line-height: 1.3; margin: 0 0 4px; letter-spacing: .01em; }
+  h1 .term { font-weight: 400; color: var(--muted); font-size: .62em; margin-left: 6px; white-space: nowrap; }
+  h2 { font-size: 20px; margin: 34px 0 10px; }
+  .hand { font-family: var(--hand); }
+
+  /* 打字机: 每讲一个关键词 */
+  .typer { margin: 10px 0 22px; font-family: var(--mono); font-size: 15px; color: var(--muted);
+           display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; min-height: 1.75em; }
+  .typer .prompt { color: var(--accent); font-weight: 700; }
+  .typer .text { color: var(--ink); font-family: var(--hand); font-size: 18px; }
+  .typer .caret { display: inline-block; width: .55em; height: 1.1em; transform: translateY(.18em);
+                  background: var(--accent); animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* 提示框 */
+  .note { display: flex; gap: 14px; background: var(--note-bg); border: 1px solid var(--note-line);
+          border-radius: 6px; padding: 14px 18px; margin: 8px 0 18px; box-shadow: 0 1px 0 var(--note-line); }
+  .note .ico { font-size: 28px; line-height: 1; padding-top: 2px; }
+  .note b { font-family: var(--hand); font-size: 18px; display: inline-block; border-bottom: 2px solid var(--note-line); margin-bottom: 4px; }
+  .note p { margin: 2px 0 0; font-size: 15px; }
+
+  ul.info { padding-left: 1.2em; margin: 0; }
+  ul.info li { margin: 2px 0; }
+  ul.info li::marker { color: var(--muted); }
+
+  /* 讲次轨道 */
+  .rail { display: grid; grid-template-columns: repeat(11, 1fr); gap: 6px; margin: 6px 0 18px; }
+  .rail a { display: block; height: 30px; border-radius: 4px; position: relative; text-align: center;
+            font: 600 13px/30px var(--mono); color: inherit; transition: transform .15s ease; }
+  .rail a:hover { transform: translateY(-3px); text-decoration: none; }
+  .rail-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); margin-top: -8px; }
+  .rail-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+                              margin-right: 5px; transform: translateY(1px); background: var(--c); }
+
+  /* 讲义列表 */
+  ol.lects { list-style: none; counter-reset: l; padding: 0; margin: 0; }
+  ol.lects li { counter-increment: l; display: grid; grid-template-columns: 2.1em auto 1fr auto; gap: 4px 10px;
+                align-items: baseline; padding: 9px 6px; border-bottom: 1px dashed var(--line); border-radius: 4px; }
+  ol.lects li:target { background: var(--note-bg); }
+  ol.lects li::before { content: counter(l) "."; color: var(--muted); text-align: right; font-family: var(--hand); font-size: 17px; }
+  .tag { font-size: 13px; padding: 0 7px; border-radius: 3px; white-space: nowrap; font-weight: 600; }
+  .m1 { --c: var(--t1); background: var(--t1); color: var(--t1i); }
+  .m2 { --c: var(--t2); background: var(--t2); color: var(--t2i); }
+  .m3 { --c: var(--t3); background: var(--t3); color: var(--t3i); }
+  .m4 { --c: var(--t4); background: var(--t4); color: var(--t4i); }
+  .m5 { --c: var(--t5); background: var(--t5); color: var(--t5i); }
+  .m6 { --c: var(--t6); background: var(--t6); color: var(--t6i); }
+  .lt { font-weight: 600; }
+  .lt .sub { font-weight: 400; color: var(--muted); }
+  .hook { grid-column: 3 / 5; font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .pdf { font-size: 13px; font-family: var(--mono); white-space: nowrap; border: 1px solid var(--line);
+         border-radius: 999px; padding: 0 10px; }
+  .pdf:hover { background: var(--note-bg); text-decoration: none; }
+
+  blockquote { margin: 18px 0 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--accent);
+               font-family: var(--hand); font-size: 18px; color: var(--ink); }
+  blockquote cite { display: block; font-family: var(--sans); font-style: normal; font-size: 13px; color: var(--muted); }
+
+  footer { max-width: 780px; margin: 18px auto 0; font-size: 13px; color: var(--muted); text-align: center; padding: 0 16px; }
+
+  @media (max-width: 560px) {
+    .rail { grid-template-columns: repeat(6, 1fr); }
+    ol.lects li { grid-template-columns: 1.8em 1fr auto; }
+    ol.lects li .tag { grid-column: 2; justify-self: start; }
+    ol.lects li .lt { grid-column: 2 / 4; }
+    .hook { grid-column: 2 / 4; }
+    ol.lects li .pdf { grid-column: 3; grid-row: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .typer .caret { animation: none; }
+    .rail a { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="./">周天航's wiki<small>for AI</small></a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="bar-link" href="#lectures">人工智能通识 (2026 秋)</a>
+    <a class="bar-right" href="https://github.com/cupzhoutianhang/rengongzhineng-tongshi">GitHub 仓库 ↗</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="paper">
+    <h1>人工智能通识<span class="term">(2026 秋季学期)</span></h1>
+
+    <div class="typer" aria-label="课程关键词">
+      <span class="prompt">&gt;&gt;&gt;</span>
+      <span>本学期, 我们一起弄明白</span>
+      <span class="text" id="typed">预测下一个词</span><span class="caret" aria-hidden="true"></span>
+    </div>
+
+    <div class="note" role="note">
+      <div class="ico" aria-hidden="true">💡</div>
+      <div>
+        <b>课件怎么用</b>
+        <p>每讲 50 页 PDF, 点讲次标题或右侧 <code>PDF</code> 即可在线打开。红色标题的方框是<strong>课堂互动</strong>, 课前可以先想一想; 每讲末尾有随堂快测和课后任务。</p>
+      </div>
+    </div>
+
+    <ul class="info">
+      <li>面向: 大一 <strong>碳储科学与工程</strong>、<strong>石油工程</strong>专业; 零基础起步, 不需要编程经验</li>
+      <li>主讲: 周天航</li>
+      <li>单位: 中国石油大学 (北京) 未来能源学院 · 重质油全国重点实验室</li>
+      <li>内容: 11 讲, 每讲 50 页; 从"大模型是什么"一直讲到 Agent 工程体系</li>
+      <li>课件下载: 讲义列表中的每个 PDF; 或整个 <a href="https://github.com/cupzhoutianhang/rengongzhineng-tongshi/archive/refs/heads/main.zip">仓库打包下载 (zip)</a></li>
+    </ul>
+
+    <h2 id="lectures">课程讲义</h2>
+
+    <nav class="rail" aria-label="讲次快速跳转">
+      <a class="m1" href="#l1" title="第一讲 AI 大模型到底是什么?">1</a>
+      <a class="m1" href="#l2" title="第二讲 走进大模型: 关键词">2</a>
+      <a class="m2" href="#l3" title="第三讲 Prompt">3</a>
+      <a class="m2" href="#l4" title="第四讲 RAG">4</a>
+      <a class="m3" href="#l5" title="第五讲 Function Call">5</a>
+      <a class="m3" href="#l6" title="第六讲 MCP">6</a>
+      <a class="m4" href="#l7" title="第七讲 AI Agent">7</a>
+      <a class="m4" href="#l8" title="第八讲 Context Engineering">8</a>
+      <a class="m5" href="#l9" title="第九讲 Fine-Tuning">9</a>
+      <a class="m6" href="#l10" title="第十讲 AI 能力选择指南">10</a>
+      <a class="m6" href="#l11" title="第十一讲 Agent 工程体系">11</a>
+    </nav>
+    <div class="rail-legend" aria-hidden="true">
+      <span style="--c: var(--t1)">认识模型</span>
+      <span style="--c: var(--t2)">让模型用起来</span>
+      <span style="--c: var(--t3)">连接工具与世界</span>
+      <span style="--c: var(--t4)">智能体与记忆</span>
+      <span style="--c: var(--t5)">定制模型</span>
+      <span style="--c: var(--t6)">从需求到工程体系</span>
+    </div>
+
+    <ol class="lects">
+      <li id="l1">
+        <span class="tag m1">认识模型</span>
+        <a class="lt" href="slides/01-AI大模型到底是什么.pdf">AI 大模型到底是什么?</a>
+        <a class="pdf" href="slides/01-AI大模型到底是什么.pdf">PDF</a>
+        <span class="hook">模型 ≠ 产品; 拆开 GPT 这个名字; Transformer 与注意力; 从基础模型到你手里的产品</span>
+      </li>
+      <li id="l2">
+        <span class="tag m1">认识模型</span>
+        <a class="lt" href="slides/02-走进大模型-你必须懂的关键词.pdf">走进大模型 <span class="sub">| 你必须懂的关键词</span></a>
+        <a class="pdf" href="slides/02-走进大模型-你必须懂的关键词.pdf">PDF</a>
+        <span class="hook">Token、Embedding、上下文长度、参数与计费、模型路由 —— 后面每一讲都会用到</span>
+      </li>
+      <li id="l3">
+        <span class="tag m2">用起来</span>
+        <a class="lt" href="slides/03-Prompt很简单-其实没你想的那么容易.pdf">Prompt 很简单? <span class="sub">| 其实没你想的那么容易</span></a>
+        <a class="pdf" href="slides/03-Prompt很简单-其实没你想的那么容易.pdf">PDF</a>
+        <span class="hook">四要素与常用技巧; Prompt 的边界在哪里; 一个产品级 Prompt 长什么样</span>
+      </li>
+      <li id="l4">
+        <span class="tag m2">用起来</span>
+        <a class="lt" href="slides/04-RAG-让大模型真正触碰现实世界的第一步.pdf">RAG <span class="sub">| 让大模型真正触碰现实世界的第一步</span></a>
+        <a class="pdf" href="slides/04-RAG-让大模型真正触碰现实世界的第一步.pdf">PDF</a>
+        <span class="hook">先检索, 再回答: 分块、向量化、检索、重排; 动手搭一个文献助手</span>
+      </li>
+      <li id="l5">
+        <span class="tag m3">连接世界</span>
+        <a class="lt" href="slides/05-Function-Call-让大模型实时感知与交互.pdf">Function Call <span class="sub">| 让大模型实时感知与交互</span></a>
+        <a class="pdf" href="slides/05-Function-Call-让大模型实时感知与交互.pdf">PDF</a>
+        <span class="hook">模型只"想", 程序才"做": 调用工具的六步回路与工程细节</span>
+      </li>
+      <li id="l6">
+        <span class="tag m3">连接世界</span>
+        <a class="lt" href="slides/06-MCP-让AI动起来的新万能插座.pdf">MCP <span class="sub">| 让 AI 动起来的新"万能插座"</span></a>
+        <a class="pdf" href="slides/06-MCP-让AI动起来的新万能插座.pdf">PDF</a>
+        <span class="hook">Host / Client / Server 三个角色, Tools / Resources / Prompts 三类能力</span>
+      </li>
+      <li id="l7">
+        <span class="tag m4">智能体</span>
+        <a class="lt" href="slides/07-AI-Agent-从工具调用到智能体时代.pdf">AI Agent <span class="sub">| 从工具调用到智能体时代</span></a>
+        <a class="pdf" href="slides/07-AI-Agent-从工具调用到智能体时代.pdf">PDF</a>
+        <span class="hook">感知—规划—行动—反思; ReAct; 多智能体协作; 放权之前先想好护栏</span>
+      </li>
+      <li id="l8">
+        <span class="tag m4">智能体</span>
+        <a class="lt" href="slides/08-Context-Engineering-AI如何记住重要信息.pdf">Context Engineering <span class="sub">| AI 如何记住重要信息</span></a>
+        <a class="pdf" href="slides/08-Context-Engineering-AI如何记住重要信息.pdf">PDF</a>
+        <span class="hook">写入、选择、压缩、隔离; 上下文腐烂与"中间丢失"; KV Cache 与账单</span>
+      </li>
+      <li id="l9">
+        <span class="tag m5">定制模型</span>
+        <a class="lt" href="slides/09-Fine-Tuning-让AI更懂你的需求.pdf">Fine-Tuning <span class="sub">| 让 AI 更懂你的需求</span></a>
+        <a class="pdf" href="slides/09-Fine-Tuning-让AI更懂你的需求.pdf">PDF</a>
+        <span class="hook">微调改的是参数; 全量与 LoRA; 准备数据、看懂 loss 曲线、算清值不值</span>
+      </li>
+      <li id="l10">
+        <span class="tag m6">工程化</span>
+        <a class="lt" href="slides/10-AI能力选择指南-从需求到方案的完整决策路.pdf">AI 能力选择指南 <span class="sub">| 从需求到方案的完整决策路</span></a>
+        <a class="pdf" href="slides/10-AI能力选择指南-从需求到方案的完整决策路.pdf">PDF</a>
+        <span class="hook">三层能力金字塔、需求六问、六步决策树: 拿到需求先问, 再选</span>
+      </li>
+      <li id="l11">
+        <span class="tag m6">工程化</span>
+        <a class="lt" href="slides/11-Agent工程体系-Skill-Harness-Agent-Plugins.pdf">Agent 工程体系 <span class="sub">| Skill、Harness、Agent Plugins</span></a>
+        <a class="pdf" href="slides/11-Agent工程体系-Skill-Harness-Agent-Plugins.pdf">PDF</a>
+        <span class="hook">把验证过的方法沉淀成 Skill, 用 Harness 组织运行, 用 Plugin 打包分发</span>
+      </li>
+    </ol>
+
+    <blockquote>
+      模型每次只做一件事: 预测下一个词。其余的一切, 都是人围绕它搭起来的。
+      <cite>—— 本课程的一条主线</cite>
+    </blockquote>
+  </article>
+
+  <footer>
+    课件仅供教学与学习使用, 转载或在课堂中使用请注明出处 · 中国石油大学 (北京)
+  </footer>
+</main>
+
+<script>
+  // 打字机: 依次展示每一讲的关键词; 用户开启"减少动态效果"时保持静止
+  (function () {
+    var el = document.getElementById('typed');
+    if (!el || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    var words = ['预测下一个词', 'Token 与 Embedding', '怎样写好一个 Prompt', '先检索, 再回答',
+                 '让模型调用工具', 'MCP 这个万能插座', '感知、规划、行动、反思', '记住该记住的',
+                 '把习惯写进参数', '从需求到方案', '把方法沉淀成 Skill'];
+    var w = 0, i = words[0].length, deleting = true;
+    function tick() {
+      var word = words[w];
+      if (deleting) {
+        i--; el.textContent = word.slice(0, i);
+        if (i <= 0) { deleting = false; w = (w + 1) % words.length; }
+        setTimeout(tick, 45);
+      } else {
+        word = words[w]; i++; el.textContent = word.slice(0, i);
+        if (i >= word.length) { deleting = true; setTimeout(tick, 1800); } else { setTimeout(tick, 110); }
+      }
+    }
+    setTimeout(tick, 1800);
+  })();
+</script>
+</body>
+</html>
