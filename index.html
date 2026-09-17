@@ -152,7 +152,8 @@
   .cand { display: grid; grid-template-columns: 4.6em 1fr 3.2em; align-items: center; gap: 10px; font-size: 14px; }
   .cand .w { font-weight: 600; color: var(--ink-2); }
   .cand .track { height: 10px; border-radius: 99px; background: var(--paper-2); border: 1px solid var(--line); overflow: hidden; }
-  .cand .fill { height: 100%; width: 0; border-radius: 99px; background: var(--muted); opacity: .55;
+  .cand .track { display: block; }
+  .cand .fill { display: block; height: 100%; width: 0; border-radius: 99px; background: var(--muted); opacity: .55;
                 transition: width .7s cubic-bezier(.2, .8, .2, 1); }
   .cand.best .fill { background: var(--accent); opacity: 1; }
   .cand.best .w { color: var(--accent); }
@@ -226,7 +227,7 @@
   .count { margin-left: auto; font: 13px var(--mono); color: var(--muted); }
 
   .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-  .card { display: grid; grid-template-columns: 220px 1fr; background: var(--paper); border: 1px solid var(--line);
+  .card { display: grid; grid-template-columns: 196px 1fr; background: var(--paper); border: 1px solid var(--line);
           border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; transition: box-shadow .2s ease, transform .2s ease; }
   .card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
   .card:target { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -630,7 +631,7 @@
         (x.s ? '<div class="sub s">' + esc(x.s) + '</div>' : '') +
         '<p class="hook h">' + esc(x.h) + '</p>' +
         '<div class="kw">' + x.k.map(function (k) { return '<span>' + esc(k) + '</span>'; }).join('') + '</div>' +
-        '<div class="card-foot"><span class="meta">50 页 · ' + x.i + ' 个互动 · ' + x.z + ' 张图</span>' +
+        '<div class="card-foot"><span class="meta" title="50 页 · ' + x.i + ' 个课堂互动 · ' + x.z + ' 张示意图">50p · ' + x.i + '互动 · ' + x.z + '图</span>' +
           '<a class="mini dark" href="' + href + '">在线阅读</a>' +
           '<a class="mini" href="' + href + '" download>下载</a></div>' +
       '</div></article>';
