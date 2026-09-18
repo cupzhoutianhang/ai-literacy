@@ -227,16 +227,27 @@
   .count { margin-left: auto; font: 13px var(--mono); color: var(--muted); }
 
   .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-  .card { display: grid; grid-template-columns: 196px 1fr; background: var(--paper); border: 1px solid var(--line);
+  .card { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line);
           border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; transition: box-shadow .2s ease, transform .2s ease; }
   .card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
   .card:target { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .thumb { position: relative; display: block; border: 0; padding: 0; margin: 0; cursor: zoom-in; background: var(--paper-2);
-           border-right: 1px solid var(--line); overflow: hidden; }
-  .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top left; transition: transform .4s ease; }
-  .card:hover .thumb img { transform: scale(1.04); }
-  .thumb .ov { position: absolute; left: 8px; bottom: 8px; font: 600 11px var(--sans); color: #fff; background: rgba(20, 24, 36, .72);
-               padding: 2px 8px; border-radius: 99px; letter-spacing: .04em; }
+  /* 整张总结图完整显示, 不裁切 */
+  .thumb { position: relative; display: block; width: 100%; border: 0; padding: 0; margin: 0; cursor: zoom-in;
+           background: #fff; border-bottom: 1px solid var(--line); aspect-ratio: 760 / 571; overflow: hidden; }
+  .thumb img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .thumb .ov { position: absolute; right: 10px; top: 10px; display: inline-flex; align-items: center; gap: 5px;
+               font: 600 11px var(--sans); color: #fff; background: rgba(20, 24, 36, .72);
+               padding: 3px 9px; border-radius: 99px; letter-spacing: .04em; opacity: .9; transition: opacity .2s ease; }
+  .thumb .ov svg { width: 12px; height: 12px; }
+  .thumb:hover .ov { opacity: 1; }
+
+  /* 悬停放大预览 (仅鼠标设备) */
+  .peek { position: fixed; z-index: 40; width: min(900px, 60vw); pointer-events: none; opacity: 0; transform: scale(.97);
+          transition: opacity .16s ease, transform .16s ease; background: #fff; border-radius: 10px; overflow: hidden;
+          box-shadow: 0 24px 60px rgba(10, 14, 24, .35), 0 0 0 1px rgba(10, 14, 24, .08); }
+  .peek.on { opacity: 1; transform: none; }
+  .peek img { display: block; width: 100%; height: auto; aspect-ratio: 1400 / 1051; background: #fff; }
+  .peek-cap { font: 600 13px var(--sans); color: #1c2233; background: #f8f5ee; padding: 7px 12px; border-top: 1px solid #e3dfd4; }
   .card-body { padding: 14px 16px 12px; display: flex; flex-direction: column; min-width: 0; }
   .card-top { display: flex; align-items: center; gap: 8px; }
   .num { font: 800 13px var(--mono); color: var(--muted); }
@@ -315,8 +326,6 @@
     .hero { padding-top: 34px; }
     .flow-row { grid-template-columns: 1fr 1fr; }
     .flow { padding: 16px 10px 14px; }
-    .card { grid-template-columns: 1fr; }
-    .thumb { border-right: 0; border-bottom: 1px solid var(--line); aspect-ratio: 4 / 3; max-width: 100%; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     .stat:nth-child(n) { border-left: 0; border-top: 1px solid var(--line); }
     .stat:nth-child(2n) { border-left: 1px solid var(--line); }
@@ -441,7 +450,7 @@
     <div class="container">
       <div class="sec-head">
         <h2><small>LECTURES</small>课程讲义</h2>
-        <p>每讲 50 页 PDF。点左侧缩略图看"一图看懂本讲", 点标题在线阅读。</p>
+        <p>每讲 50 页 PDF。卡片上的图是该讲的"本讲总结"页: 鼠标移上去会放大, 点击可固定查看; 点标题在线阅读全讲。</p>
       </div>
 
       <div class="toolbar">
@@ -624,7 +633,7 @@
     return '<article class="card mod' + x.m + '" id="l' + x.n + '" data-m="' + x.m + '">' +
       '<button class="thumb" type="button" data-n="' + x.n + '" aria-label="查看第' + CN[x.n] + '讲的总结图">' +
         '<img src="assets/thumbs/l' + pad(x.n) + '.jpg" alt="第' + CN[x.n] + '讲本讲总结页" loading="lazy" width="760" height="571">' +
-        '<span class="ov">一图看懂本讲</span></button>' +
+        '<span class="ov"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/></svg>一图看懂本讲</span></button>' +
       '<div class="card-body">' +
         '<div class="card-top"><span class="num">L' + pad(x.n) + '</span><span class="tag">' + esc(mod.name) + '</span></div>' +
         '<h3><a class="t" href="' + href + '">' + esc(x.t) + '</a></h3>' +
@@ -694,12 +703,50 @@
   });
   apply();
 
+  /* ---------- 悬停放大预览 (鼠标设备, 窗口够宽时) ---------- */
+  var peek = document.createElement('div');
+  peek.className = 'peek'; peek.setAttribute('aria-hidden', 'true');
+  peek.innerHTML = '<img alt=""><div class="peek-cap"></div>';
+  document.body.appendChild(peek);
+  var peekImg = peek.querySelector('img'), peekCap = peek.querySelector('.peek-cap'), peekOn = null;
+  var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  function hidePeek() { peek.classList.remove('on'); peekOn = null; }
+  function showPeek(btn) {
+    if (!canHover || window.innerWidth < 900) return;
+    var x = L[+btn.getAttribute('data-n') - 1];
+    if (peekOn !== btn) {
+      peekImg.src = 'assets/hd/l' + pad(x.n) + '.jpg';
+      peekCap.textContent = '第' + CN[x.n] + '讲 · 本讲总结  ——  点击可固定查看';
+      peekOn = btn;
+    }
+    var r = btn.getBoundingClientRect(), gap = 18;
+    var w = Math.min(900, window.innerWidth * 0.6), h = w * 1051 / 1400 + 34;
+    var left = r.right + gap;
+    if (left + w > window.innerWidth - 12) left = r.left - gap - w;          // 右侧放不下就放左侧
+    if (left < 12) left = Math.max(12, (window.innerWidth - w) / 2);          // 两侧都不够就居中
+    var top = r.top + r.height / 2 - h / 2;
+    top = Math.max(70, Math.min(top, window.innerHeight - h - 12));
+    peek.style.left = left + 'px'; peek.style.top = top + 'px';
+    peek.classList.add('on');
+  }
+  cards.addEventListener('mouseover', function (e) { var b = e.target.closest('.thumb'); if (b) showPeek(b); });
+  cards.addEventListener('mouseout', function (e) {
+    var b = e.target.closest('.thumb'); if (b && !b.contains(e.relatedTarget)) hidePeek();
+  });
+  window.addEventListener('scroll', hidePeek, { passive: true });
+  window.addEventListener('resize', hidePeek);
+  // 预取高清图, 悬停时不必等待
+  if (canHover && 'requestIdleCallback' in window) {
+    requestIdleCallback(function () { L.forEach(function (x) { var i = new Image(); i.src = 'assets/hd/l' + pad(x.n) + '.jpg'; }); });
+  }
+
   /* ---------- 大图 ---------- */
   var dlg = document.getElementById('dlg');
   cards.addEventListener('click', function (e) {
     var b = e.target.closest('.thumb'); if (!b) return;
     var x = L[+b.getAttribute('data-n') - 1];
-    document.getElementById('dlgImg').src = 'assets/thumbs/l' + pad(x.n) + '.jpg';
+    hidePeek();
+    document.getElementById('dlgImg').src = 'assets/hd/l' + pad(x.n) + '.jpg';
     document.getElementById('dlgImg').alt = '第' + CN[x.n] + '讲本讲总结页';
     document.getElementById('dlgCap').textContent = '第' + CN[x.n] + '讲 · ' + x.t + (x.s ? ' — ' + x.s : '');
     document.getElementById('dlgPdf').href = 'slides/' + x.f;
