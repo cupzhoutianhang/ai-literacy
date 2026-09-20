@@ -2,7 +2,7 @@
 
 面向化工、储能等能源类专业的 AI 大模型入门课件, 共 11 讲, 每讲 50 页, PDF 格式。
 
-**🌐 课程主页: <https://cupzhoutianhang.github.io/rengongzhineng-tongshi/>** (在线浏览全部讲义)
+**🌐 课程主页: <https://cupzhoutianhang.github.io/ai-literacy/>** (在线浏览全部讲义)
 
 - **主讲**: 周天航
 - **单位**: 中国石油大学 (北京) 未来能源学院 · 重质油全国重点实验室
