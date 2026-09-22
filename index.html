@@ -356,6 +356,100 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
     html { scroll-behavior: auto; }
   }
+
+  /* ================= 2026 editorial refinement ================= */
+  :root {
+    --ink: #142a2e;
+    --ink-2: #3d5658;
+    --muted: #718486;
+    --bg: #f3f4ef;
+    --paper: #fcfdf9;
+    --paper-2: #eaf0ec;
+    --line: #d8e1dc;
+    --line-2: #bdcec6;
+    --accent: #e05b3f;
+    --accent-soft: #f9ded5;
+    --link: #146d6c;
+    --focus: #e05b3f;
+    --shadow-1: 0 1px 2px rgba(20, 42, 46, .06);
+    --shadow-2: 0 18px 50px -24px rgba(20, 42, 46, .30);
+    --radius: 14px;
+  }
+  :root[data-theme="dark"] {
+    --ink: #ecf5f0; --ink-2: #c1d1cb; --muted: #8da39d; --bg: #111b1b; --paper: #172525; --paper-2: #203333;
+    --line: #2e4845; --line-2: #41635e; --accent: #ff9075; --accent-soft: #422b27; --link: #8ed4c6; --focus: #ffb09d;
+    --shadow-1: 0 1px 2px rgba(0,0,0,.3); --shadow-2: 0 18px 50px -24px rgba(0,0,0,.75);
+  }
+  body {
+    background-color: var(--bg);
+    background-image: radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 34rem),
+      radial-gradient(circle at 91% 10%, color-mix(in srgb, var(--link) 10%, transparent), transparent 30rem),
+      linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: auto, auto, 24px 24px, 24px 24px;
+  }
+  .bar { background: color-mix(in srgb, var(--paper) 82%, transparent); border-bottom-color: color-mix(in srgb, var(--line) 74%, transparent); }
+  .brand { letter-spacing: -.02em; }
+  .hero { padding-top: 72px; position: relative; }
+  .hero::before { content: "01 / 11"; position: absolute; right: 22px; top: 28px; font: 700 11px var(--mono); color: var(--accent); letter-spacing: .16em; }
+  .hero-grid { gap: clamp(28px, 5vw, 76px); }
+  .eyebrow { border-color: color-mix(in srgb, var(--accent) 28%, var(--line)); background: color-mix(in srgb, var(--paper) 84%, var(--accent-soft)); }
+  .hero h1 { max-width: 8em; letter-spacing: -.045em; }
+  .hero h1 .ai { color: var(--link); }
+  .hero h1 .ai::after { background: color-mix(in srgb, var(--link) 17%, transparent); }
+  .lede { max-width: 31em; color: var(--ink-2); }
+  .btn { border-radius: 999px; padding-inline: 18px; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fffdf8; box-shadow: 0 8px 18px -10px var(--accent); }
+  .demo { border-radius: 22px; box-shadow: 0 24px 70px -30px rgba(20,42,46,.42); transform: rotate(1.2deg); }
+  .demo:hover { transform: rotate(0deg) translateY(-3px); transition: transform .3s ease; }
+  .demo-head { background: var(--ink); color: #dff0ea; border-bottom-color: var(--ink); }
+  .demo-foot { background: color-mix(in srgb, var(--paper-2) 65%, var(--paper)); }
+  .stats { border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-2); }
+  .stat b { color: var(--link); }
+  section { padding-top: 86px; }
+  .sec-head { margin-bottom: 26px; }
+  .sec-head h2 { font-size: clamp(26px, 3vw, 34px); letter-spacing: -.04em; }
+  .sec-head h2 small { color: var(--accent); }
+  .flow, .card, .path, .info { border-radius: 18px; box-shadow: var(--shadow-1); }
+  .flow { background: color-mix(in srgb, var(--paper) 88%, var(--link)); }
+  .card { overflow: hidden; }
+  .card:hover { box-shadow: var(--shadow-2); transform: translateY(-4px); transition: transform .2s ease, box-shadow .2s ease; }
+  .card .thumb { background: var(--paper-2); }
+  .card-foot { flex-wrap: wrap; }
+  .card-project { margin-left: auto; color: var(--link); font-size: 12px; font-weight: 700; }
+  .card-project:hover { color: var(--accent); }
+  #projects { position: relative; }
+  #projects::before { content: ""; position: absolute; inset: 14px 0 auto; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+  .project-intro { max-width: 52em !important; }
+  .project-hero { display: grid; grid-template-columns: 1.3fr .7fr; gap: 16px; margin: 10px 0 24px; }
+  .project-manifest { padding: 22px 24px; background: var(--ink); color: #edf7f1; border-radius: 20px; position: relative; overflow: hidden; }
+  .project-manifest::after { content: "LOCAL FIRST"; position: absolute; right: -12px; bottom: 12px; transform: rotate(-12deg); font: 700 36px var(--mono); color: rgba(255,255,255,.08); letter-spacing: .08em; }
+  .project-manifest .manifest-kicker { color: #9dd8c8; font: 700 11px var(--mono); letter-spacing: .14em; }
+  .project-manifest h3 { margin: 8px 0 7px; font-size: 24px; letter-spacing: -.03em; }
+  .project-manifest p { margin: 0; max-width: 38em; color: #c7dbd4; font-size: 14px; }
+  .project-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+  .project-stat { display: flex; flex-direction: column; justify-content: center; padding: 17px; background: var(--paper); }
+  .project-stat b { font: 800 26px var(--mono); color: var(--accent); }
+  .project-stat span { color: var(--muted); font-size: 12px; }
+  .project-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 0; }
+  .project-card { min-height: 218px; padding: 20px; border-radius: 18px; position: relative; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .project-card::after { content: attr(data-index); position: absolute; top: -10px; right: 12px; font: 800 72px/1 var(--mono); color: color-mix(in srgb, var(--link) 8%, transparent); pointer-events: none; }
+  .project-card:hover { border-color: color-mix(in srgb, var(--accent) 58%, var(--line)); transform: translateY(-5px); box-shadow: var(--shadow-2); }
+  .project-card .project-no { position: relative; z-index: 1; color: var(--link); font-size: 11px; }
+  .project-card h3 { position: relative; z-index: 1; margin: 10px 0 8px; font-size: 19px; letter-spacing: -.02em; }
+  .project-card p { position: relative; z-index: 1; max-width: 30em; }
+  .project-card .project-tags { position: relative; z-index: 1; padding-top: 15px; }
+  .project-tags span { border-style: solid; background: var(--paper-2); }
+  .project-card .project-open { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 4px; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--accent); }
+  .project-card .project-open:hover { text-decoration: none; gap: 8px; }
+  .project-actions { margin-top: 20px; }
+  .project-setup { background: color-mix(in srgb, var(--paper) 84%, var(--link)); border: 1px solid var(--line); padding: 14px; border-radius: 18px; }
+  .setup-box { background: transparent !important; border: 0 !important; padding: 9px 12px !important; }
+  .setup-box b { color: var(--link); }
+  code { color: var(--accent); }
+  footer { margin-top: 86px; }
+  @media (max-width: 900px) { .project-hero { grid-template-columns: 1fr; } .project-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .hero { padding-top: 50px; } .hero::before { top: 16px; right: 20px; } .demo { transform: none; } .project-grid { grid-template-columns: 1fr; } .project-stats { grid-template-columns: repeat(3, 1fr); } .project-stat { padding: 12px 9px; } .project-stat b { font-size: 21px; } }
+
 </style>
 </head>
 <body>
@@ -508,28 +602,40 @@
   <section id="projects">
     <div class="container">
       <div class="sec-head">
-        <h2><small>PROJECTS</small>配套实验代码</h2>
-        <p class="project-intro">每一讲配一个能跑起来的小项目：Embedding 在本地运行，大模型通过 SSH 隧道连接课程服务器上的 vLLM。项目默认使用合成能源数据，适合课堂演示、课后练习和逐步扩展。</p>
+        <h2><small>PROJECTS / 11</small>一讲一项目</h2>
+        <p class="project-intro">把每个概念变成一个可运行的小实验。默认本地优先：Embedding 在本地完成；需要生成式回答时，再通过 SSH 隧道接入课程服务器上的 vLLM。</p>
+      </div>
+      <div class="project-hero">
+        <div class="project-manifest">
+          <div class="manifest-kicker">COURSE REPOSITORY · HANDS-ON</div>
+          <h3>从“看懂”到“跑起来”</h3>
+          <p>每个项目都包含 README、入口脚本、合成能源数据和测试。没有服务器时，优先使用 mock / deterministic 模式；有服务器时，只需要配置一个 OpenAI 兼容端点。</p>
+        </div>
+        <div class="project-stats" aria-label="实验资源统计">
+          <div class="project-stat"><b>11</b><span>个小项目</span></div>
+          <div class="project-stat"><b>0</b><span>个硬编码密钥</span></div>
+          <div class="project-stat"><b>2</b><span>种运行模式</span></div>
+        </div>
       </div>
       <div class="project-grid">
-        <article class="project-card"><span class="project-no">L01 · 认识模型</span><h3>下一个词预测实验室</h3><p>用 token、词频、Bigram 和 toy attention 看懂模型每一步做什么。</p><div class="project-tags"><span>Python</span><span>NumPy</span></div></article>
-        <article class="project-card"><span class="project-no">L02 · 认识模型</span><h3>能源术语 Embedding</h3><p>本地 BGE 模型计算语义相似度，并把能源术语聚类。</p><div class="project-tags"><span>BGE</span><span>本地模型</span></div></article>
-        <article class="project-card"><span class="project-no">L03 · 让模型用起来</span><h3>工艺日报结构化</h3><p>用 Prompt 要求大模型输出 JSON，再用 Pydantic 校验边界。</p><div class="project-tags"><span>Prompt</span><span>JSON</span></div></article>
-        <article class="project-card"><span class="project-no">L04 · 让模型用起来</span><h3>安全规程 RAG</h3><p>Markdown 分块、向量检索、来源标记和带证据的回答。</p><div class="project-tags"><span>Chroma</span><span>RAG</span></div></article>
-        <article class="project-card"><span class="project-no">L05 · 连接工具与世界</span><h3>装置数据 Function Call</h3><p>把传感器查询和压降计算注册成有 Schema 的安全工具。</p><div class="project-tags"><span>Tools</span><span>JSON Schema</span></div></article>
-        <article class="project-card"><span class="project-no">L06 · 连接工具与世界</span><h3>能源数据 MCP</h3><p>用本地协议样例暴露传感器资源、规程资源和分析工具。</p><div class="project-tags"><span>MCP</span><span>Resources</span></div></article>
-        <article class="project-card"><span class="project-no">L07 · 智能体与记忆</span><h3>受限设备巡检 Agent</h3><p>规划、工具白名单、最大步数、失败处理和审计日志。</p><div class="project-tags"><span>Agent</span><span>Guardrails</span></div></article>
-        <article class="project-card"><span class="project-no">L08 · 智能体与记忆</span><h3>上下文工程实验台</h3><p>Embedding 驱动的记忆选择、压缩、隔离和中间丢失实验。</p><div class="project-tags"><span>Memory</span><span>Context</span></div></article>
-        <article class="project-card"><span class="project-no">L09 · 定制模型</span><h3>工艺文本微调</h3><p>先跑轻量意图分类基线，再按需在 GPU 服务器上做 LoRA。</p><div class="project-tags"><span>Baseline</span><span>LoRA</span></div></article>
-        <article class="project-card"><span class="project-no">L10 · 从需求到工程体系</span><h3>AI 能力选择决策树</h3><p>根据资料、工具、多步任务和风格要求选择合适能力。</p><div class="project-tags"><span>Decision</span><span>Workflow</span></div></article>
-        <article class="project-card"><span class="project-no">L11 · 从需求到工程体系</span><h3>Skill / Harness / Plugin</h3><p>发现、渐进式加载 Skill，运行 smoke test，并用 manifest 打包。</p><div class="project-tags"><span>Harness</span><span>Plugin</span></div></article>
+        <article class="project-card" data-index="01"><span class="project-no">L01 · 认识模型</span><h3>下一个词预测实验室</h3><p>用 token、词频、Bigram 和 toy attention 看懂模型每一步做什么。</p><div class="project-tags"><span>Python</span><span>NumPy</span><span>离线</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l01-next-token">打开项目 →</a></article>
+        <article class="project-card" data-index="02"><span class="project-no">L02 · 认识模型</span><h3>能源术语 Embedding</h3><p>用本地 BGE 计算语义相似度，并把能源术语聚类。</p><div class="project-tags"><span>BGE</span><span>本地模型</span><span>可离线</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l02-embedding-lab">打开项目 →</a></article>
+        <article class="project-card" data-index="03"><span class="project-no">L03 · 让模型用起来</span><h3>工艺日报结构化</h3><p>用 Prompt 要求模型输出 JSON，再用 Pydantic 校验边界。</p><div class="project-tags"><span>Prompt</span><span>JSON</span><span>可 mock</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l03-prompt">打开项目 →</a></article>
+        <article class="project-card" data-index="04"><span class="project-no">L04 · 让模型用起来</span><h3>安全规程 RAG</h3><p>Markdown 分块、向量检索、来源标记和带证据的回答。</p><div class="project-tags"><span>Chroma</span><span>RAG</span><span>需本地模型</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l04-rag">打开项目 →</a></article>
+        <article class="project-card" data-index="05"><span class="project-no">L05 · 连接工具与世界</span><h3>装置数据 Function Call</h3><p>把传感器查询和压降计算注册成有 Schema 的安全工具。</p><div class="project-tags"><span>Tools</span><span>Schema</span><span>规则路由</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l05-function-call">打开项目 →</a></article>
+        <article class="project-card" data-index="06"><span class="project-no">L06 · 连接工具与世界</span><h3>能源数据 MCP</h3><p>用无 SDK 的本地协议样例观察资源、工具和 JSON-RPC 形状。</p><div class="project-tags"><span>MCP 形状</span><span>stdio</span><span>可选 SDK</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l06-mcp">打开项目 →</a></article>
+        <article class="project-card" data-index="07"><span class="project-no">L07 · 智能体与记忆</span><h3>受限设备巡检 Agent</h3><p>规划、工具白名单、最大步数、失败处理和审计日志。</p><div class="project-tags"><span>Agent</span><span>Guardrails</span><span>可 mock</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l07-agent">打开项目 →</a></article>
+        <article class="project-card" data-index="08"><span class="project-no">L08 · 智能体与记忆</span><h3>上下文工程实验台</h3><p>做记忆选择、压缩、隔离和中间丢失实验，理解窗口不是越大越好。</p><div class="project-tags"><span>Memory</span><span>Context</span><span>可 mock</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l08-context-engineering">打开项目 →</a></article>
+        <article class="project-card" data-index="09"><span class="project-no">L09 · 定制模型</span><h3>工艺文本分类基线</h3><p>先跑 TF-IDF + LogisticRegression 基线，再按需准备 GPU 上的 LoRA。</p><div class="project-tags"><span>Baseline</span><span>LoRA 准备</span><span>GPU 可选</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l09-fine-tuning">打开项目 →</a></article>
+        <article class="project-card" data-index="10"><span class="project-no">L10 · 从需求到工程体系</span><h3>AI 能力选择决策树</h3><p>根据资料、工具、多步任务和风格要求选择合适能力。</p><div class="project-tags"><span>Decision</span><span>Workflow</span><span>离线</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l10-capability-selection">打开项目 →</a></article>
+        <article class="project-card" data-index="11"><span class="project-no">L11 · 从需求到工程体系</span><h3>Skill / Harness / Plugin</h3><p>发现、渐进式加载 Skill，运行 smoke test，并用 manifest 打包。</p><div class="project-tags"><span>Harness</span><span>Plugin</span><span>可 mock</span></div><a class="project-open" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l11-agent-harness">打开项目 →</a></article>
       </div>
       <div class="project-actions">
         <a class="btn primary" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects">在 GitHub 查看全部项目 <svg aria-hidden="true"><use href="#i-in"/></svg></a>
         <a class="btn" href="https://github.com/cupzhoutianhang/ai-literacy/blob/main/COURSE_INTEGRATION.md">查看运行说明</a>
       </div>
       <div class="project-setup">
-        <div class="setup-box"><b>本地 Embedding</b><span>默认使用 <code>BAAI/bge-small-zh-v1.5</code>，首次运行后离线可用。</span></div>
+        <div class="setup-box"><b>本地 Embedding</b><span>默认 <code>BAAI/bge-small-zh-v1.5</code>；首次下载后可切换到本地目录。</span></div>
         <div class="setup-box"><b>服务器大模型</b><span>运行 <code>ssh -N -L 18002:127.0.0.1:8002 010</code>，即可调用 vLLM 的 <code>main</code> 模型。</span></div>
       </div>
     </div>
@@ -693,7 +799,7 @@
         '<div class="kw">' + x.k.map(function (k) { return '<span>' + esc(k) + '</span>'; }).join('') + '</div>' +
         '<div class="card-foot"><span class="meta" title="50 页 · ' + x.i + ' 个课堂互动 · ' + x.z + ' 张示意图">50p · ' + x.i + '互动 · ' + x.z + '图</span>' +
           '<a class="mini dark" href="' + href + '">在线阅读</a>' +
-          '<a class="mini" href="' + href + '" download>下载</a></div>' +
+          '<a class="mini" href="' + href + '" download>下载</a>' + '<a class="card-project" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects/l' + pad(x.n) + '-'+ ['next-token','embedding-lab','prompt','rag','function-call','mcp','agent','context-engineering','fine-tuning','capability-selection','agent-harness'][x.n-1] +'">配套实验 →</a></div>' +
       '</div></article>';
   }).join('');
 
