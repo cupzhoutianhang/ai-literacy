@@ -1,0 +1,8 @@
+{
+  "name": "energy-plugin",
+  "version": "0.1.0",
+  "skills": ["energy-report"],
+  "tools": ["summarize_records"],
+  "smoke_test": "python main.py --smoke"
+}
+

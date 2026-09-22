@@ -266,6 +266,24 @@
   .empty { display: none; text-align: center; color: var(--muted); padding: 30px; border: 1px dashed var(--line-2); border-radius: var(--radius); }
   mark { background: color-mix(in srgb, #ffd54a 55%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
 
+  /* ================= 配套实验 ================= */
+  .project-intro { max-width: 760px; color: var(--muted); line-height: 1.7; }
+  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+  .project-card { display: flex; flex-direction: column; min-height: 178px; padding: 16px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-1); }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-2px); transition: transform .18s ease, border-color .18s ease; }
+  .project-card .project-no { font: 700 12px var(--mono); color: var(--accent); letter-spacing: .08em; }
+  .project-card h3 { margin: 7px 0 5px; font-size: 17px; }
+  .project-card p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+  .project-card .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 12px; }
+  .project-tags span { font: 11px var(--mono); padding: 2px 6px; color: var(--ink-2); border: 1px dashed var(--line-2); border-radius: 4px; }
+  .project-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .project-setup { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  .project-setup .setup-box { padding: 15px 17px; background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius); }
+  .project-setup b { display: block; margin-bottom: 5px; }
+  .project-setup code { font: 12px var(--mono); word-break: break-word; }
+  @media (max-width: 900px) { .project-grid { grid-template-columns: repeat(2, 1fr); } .project-setup { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .project-grid { grid-template-columns: 1fr; } }
+
   /* ================= 怎么学 ================= */
   .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .path { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-1); position: relative; }
@@ -373,6 +391,7 @@
     <nav aria-label="页面导航">
       <a href="#roadmap">路线图</a>
       <a href="#lectures">讲义</a>
+      <a href="#projects">实验</a>
       <a href="#howto">怎么学</a>
     </nav>
     <div class="bar-right">
@@ -401,6 +420,7 @@
           <a class="btn primary" href="slides/01-AI大模型到底是什么.pdf">从第一讲开始
             <svg aria-hidden="true"><use href="#i-in"/></svg></a>
           <a class="btn" href="#lectures">浏览全部讲义</a>
+          <a class="btn" href="#projects">配套实验代码</a>
           <a class="btn" href="https://github.com/cupzhoutianhang/ai-literacy/archive/refs/heads/main.zip">
             <svg aria-hidden="true"><use href="#i-dl"/></svg>打包下载</a>
         </div>
@@ -481,6 +501,37 @@
           <li><a href="slides/11-Agent工程体系-Skill-Harness-Agent-Plugins.pdf">第十一讲 Agent 工程体系</a></li>
         </ol>
       </noscript>
+    </div>
+  </section>
+
+  <!-- ============ 配套实验 ============ -->
+  <section id="projects">
+    <div class="container">
+      <div class="sec-head">
+        <h2><small>PROJECTS</small>配套实验代码</h2>
+        <p class="project-intro">每一讲配一个能跑起来的小项目：Embedding 在本地运行，大模型通过 SSH 隧道连接课程服务器上的 vLLM。项目默认使用合成能源数据，适合课堂演示、课后练习和逐步扩展。</p>
+      </div>
+      <div class="project-grid">
+        <article class="project-card"><span class="project-no">L01 · 认识模型</span><h3>下一个词预测实验室</h3><p>用 token、词频、Bigram 和 toy attention 看懂模型每一步做什么。</p><div class="project-tags"><span>Python</span><span>NumPy</span></div></article>
+        <article class="project-card"><span class="project-no">L02 · 认识模型</span><h3>能源术语 Embedding</h3><p>本地 BGE 模型计算语义相似度，并把能源术语聚类。</p><div class="project-tags"><span>BGE</span><span>本地模型</span></div></article>
+        <article class="project-card"><span class="project-no">L03 · 让模型用起来</span><h3>工艺日报结构化</h3><p>用 Prompt 要求大模型输出 JSON，再用 Pydantic 校验边界。</p><div class="project-tags"><span>Prompt</span><span>JSON</span></div></article>
+        <article class="project-card"><span class="project-no">L04 · 让模型用起来</span><h3>安全规程 RAG</h3><p>Markdown 分块、向量检索、来源标记和带证据的回答。</p><div class="project-tags"><span>Chroma</span><span>RAG</span></div></article>
+        <article class="project-card"><span class="project-no">L05 · 连接工具与世界</span><h3>装置数据 Function Call</h3><p>把传感器查询和压降计算注册成有 Schema 的安全工具。</p><div class="project-tags"><span>Tools</span><span>JSON Schema</span></div></article>
+        <article class="project-card"><span class="project-no">L06 · 连接工具与世界</span><h3>能源数据 MCP</h3><p>用本地协议样例暴露传感器资源、规程资源和分析工具。</p><div class="project-tags"><span>MCP</span><span>Resources</span></div></article>
+        <article class="project-card"><span class="project-no">L07 · 智能体与记忆</span><h3>受限设备巡检 Agent</h3><p>规划、工具白名单、最大步数、失败处理和审计日志。</p><div class="project-tags"><span>Agent</span><span>Guardrails</span></div></article>
+        <article class="project-card"><span class="project-no">L08 · 智能体与记忆</span><h3>上下文工程实验台</h3><p>Embedding 驱动的记忆选择、压缩、隔离和中间丢失实验。</p><div class="project-tags"><span>Memory</span><span>Context</span></div></article>
+        <article class="project-card"><span class="project-no">L09 · 定制模型</span><h3>工艺文本微调</h3><p>先跑轻量意图分类基线，再按需在 GPU 服务器上做 LoRA。</p><div class="project-tags"><span>Baseline</span><span>LoRA</span></div></article>
+        <article class="project-card"><span class="project-no">L10 · 从需求到工程体系</span><h3>AI 能力选择决策树</h3><p>根据资料、工具、多步任务和风格要求选择合适能力。</p><div class="project-tags"><span>Decision</span><span>Workflow</span></div></article>
+        <article class="project-card"><span class="project-no">L11 · 从需求到工程体系</span><h3>Skill / Harness / Plugin</h3><p>发现、渐进式加载 Skill，运行 smoke test，并用 manifest 打包。</p><div class="project-tags"><span>Harness</span><span>Plugin</span></div></article>
+      </div>
+      <div class="project-actions">
+        <a class="btn primary" href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/projects">在 GitHub 查看全部项目 <svg aria-hidden="true"><use href="#i-in"/></svg></a>
+        <a class="btn" href="https://github.com/cupzhoutianhang/ai-literacy/blob/main/COURSE_INTEGRATION.md">查看运行说明</a>
+      </div>
+      <div class="project-setup">
+        <div class="setup-box"><b>本地 Embedding</b><span>默认使用 <code>BAAI/bge-small-zh-v1.5</code>，首次运行后离线可用。</span></div>
+        <div class="setup-box"><b>服务器大模型</b><span>运行 <code>ssh -N -L 18002:127.0.0.1:8002 010</code>，即可调用 vLLM 的 <code>main</code> 模型。</span></div>
+      </div>
     </div>
   </section>
 

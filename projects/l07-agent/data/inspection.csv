@@ -1,0 +1,5 @@
+timestamp,equipment,sensor,value,unit
+2026-09-20T09:00:00,pump-A,temperature,74.1,C
+2026-09-20T09:00:00,pump-A,pressure_out,6.8,bar
+2026-09-20T09:00:00,pump-B,temperature,83.2,C
+2026-09-20T09:00:00,pump-B,pressure_out,6.2,bar

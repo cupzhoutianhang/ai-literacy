@@ -1,0 +1,20 @@
+[project]
+name = "ai-literacy-mini-projects"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "openai>=1.40",
+  "pydantic>=2.7",
+  "python-dotenv>=1.0",
+  "rich>=13.7",
+  "scikit-learn>=1.5",
+  "sentence-transformers>=3.0",
+]
+
+[project.optional-dependencies]
+rag = ["chromadb>=0.5", "pypdf>=5.0"]
+mcp = ["mcp>=1.0"]
+web = ["streamlit>=1.38"]
+finetune = ["accelerate>=0.34", "datasets>=2.21", "peft>=0.12", "transformers>=4.45", "trl>=0.10"]
+dev = ["pytest>=8.3", "ruff>=0.6"]

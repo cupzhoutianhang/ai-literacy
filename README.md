@@ -45,3 +45,24 @@
 ## 使用说明
 
 课件仅供教学与学习使用。转载或在课堂中使用, 请注明出处。
+
+## 配套实验代码
+
+现在每一讲都有一个可以运行的小项目，集中在 [`projects/`](projects/) 目录：
+
+| 讲次 | 项目 | 主要内容 |
+|---|---|---|
+| L01 | [下一个词预测实验室](projects/l01-next-token/) | token、Bigram、toy attention |
+| L02 | [能源术语 Embedding](projects/l02-embedding-lab/) | 本地 BGE 相似度与聚类 |
+| L03 | [工艺日报结构化](projects/l03-prompt/) | Prompt、JSON Schema、Pydantic |
+| L04 | [安全规程 RAG](projects/l04-rag/) | 分块、Chroma、来源引用 |
+| L05 | [Function Call](projects/l05-function-call/) | 传感器工具和压降计算 |
+| L06 | [MCP](projects/l06-mcp/) | resources、tools、本地协议样例 |
+| L07 | [设备巡检 Agent](projects/l07-agent/) | 工具白名单、步数限制、审计日志 |
+| L08 | [Context Engineering](projects/l08-context-engineering/) | 记忆选择、压缩、隔离 |
+| L09 | [Fine-Tuning](projects/l09-fine-tuning/) | 意图分类基线与可选 LoRA |
+| L10 | [能力选择决策树](projects/l10-capability-selection/) | 从需求选择 Prompt/RAG/Agent 等能力 |
+| L11 | [Agent 工程体系](projects/l11-agent-harness/) | Skill、Harness、Plugin smoke test |
+
+Embedding 默认使用本地 `BAAI/bge-small-zh-v1.5`；需要生成文本的项目通过 SSH 隧道连接服务器上的 vLLM。完整安装和运行说明见 [`COURSE_INTEGRATION.md`](COURSE_INTEGRATION.md)。
+
