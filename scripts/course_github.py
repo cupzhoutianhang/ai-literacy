@@ -6,6 +6,7 @@ import csv
 import io
 import json
 import os
+import re
 import time
 import urllib.error
 import urllib.parse
@@ -177,7 +178,7 @@ def excel_column(number):
 
 
 def write_xlsx(path, sheets):
-    """Minimal interoperable OOXML workbook, all cells explicitly inline text."""
+    """OOXML workbook: trusted grade columns numeric, identity columns plain text."""
     ns = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'
     with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as archive:
         types = '<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
@@ -187,11 +188,16 @@ def write_xlsx(path, sheets):
             types += '<Override PartName="/xl/worksheets/sheet' + str(index) + '.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
             workbook += '<sheet name="' + escape(name) + '" sheetId="' + str(index) + '" r:id="rId' + str(index) + '"/>'
             rels += '<Relationship Id="rId' + str(index) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet' + str(index) + '.xml"/>'
-            xml = '<worksheet xmlns="' + ns + '"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetData>'
+            dimension = 'A1:' + excel_column(len(rows[0])) + str(len(rows))
+            xml = '<worksheet xmlns="' + ns + '"><dimension ref="' + dimension + '"/><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetData>'
             for row_number, values in enumerate(rows, 1):
                 xml += '<row r="' + str(row_number) + '">'
                 for column, value in enumerate(values, 1):
-                    xml += '<c r="' + excel_column(column) + str(row_number) + '" t="inlineStr"><is><t xml:space="preserve">' + escape(str(value)) + '</t></is></c>'
+                    coordinate = excel_column(column) + str(row_number)
+                    if row_number > 1 and column in (5, 6, 7, 12) and re.fullmatch(r'[0-9]+(?:\.[0-9]+)?', str(value)):
+                        xml += '<c r="' + coordinate + '" t="n"><v>' + str(value) + '</v></c>'
+                    else:
+                        xml += '<c r="' + coordinate + '" t="inlineStr"><is><t xml:space="preserve">' + escape(str(value)) + '</t></is></c>'
                 xml += '</row>'
             xml += '</sheetData><autoFilter ref="A1:' + excel_column(len(rows[0])) + str(len(rows)) + '"/></worksheet>'
             archive.writestr('xl/worksheets/sheet' + str(index) + '.xml', xml)
