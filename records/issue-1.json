@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "issue_number": 1,
+  "issue_url": "https://github.com/cupzhoutianhang/ai-literacy/issues/1",
+  "github_login": "cupzhoutianhang",
+  "submission_hash": "e422bdf5a9c7e4b07d23ef367c980a0e86055b767a969d322aed062a71c2e567",
+  "submitted_at": "2026-10-01T15:45:28Z",
+  "graded_at": "2026-10-01T15:45:42.702518+00:00",
+  "task_id": "A01",
+  "task_version": 1,
+  "name": "教师测试（虚拟数据）",
+  "class_name": "测试班",
+  "status": "graded",
+  "score": 100,
+  "auto_score": 100,
+  "maximum": 100,
+  "checks": [
+    {
+      "label": "A-01 温度提取",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "A-01 压力换算",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "A-01 状态",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "A-02 温度换算",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "A-02 压力提取",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "A-02 报警判断",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "A-03 不补造温度",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "A-03 缺失状态",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "首次提示词记录完整",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    },
+    {
+      "label": "修订提示词记录完整",
+      "points": 10,
+      "earned": 10,
+      "passed": true
+    }
+  ],
+  "late": false,
+  "manual_review": null,
+  "error": "",
+  "is_test": true,
+  "history": []
+}
