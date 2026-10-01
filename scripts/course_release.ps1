@@ -1,10 +1,11 @@
 param(
     [ValidateSet('Publish', 'Restore')][string]$Mode = 'Publish',
     [string]$Ref = '',
-    [string]$ExpectedRemote = ''
+    [string]$ExpectedRemote = '',
+    [string]$RepositoryPath = (Split-Path -Parent $PSScriptRoot)
 )
 $ErrorActionPreference = 'Stop'
-Set-Location -LiteralPath (Split-Path -Parent $PSScriptRoot)
+Set-Location -LiteralPath $RepositoryPath
 function Invoke-CourseGit {
     param([Parameter(ValueFromRemainingArguments=$true)][string[]]$GitArgs)
     $result = & git @GitArgs
