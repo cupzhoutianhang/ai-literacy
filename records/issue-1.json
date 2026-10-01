@@ -5,13 +5,13 @@
   "github_login": "cupzhoutianhang",
   "submission_hash": "ed2f57040eb3de3af1849d927995851cfae027109983e80b6849fca978c26219",
   "submitted_at": "2026-10-01T15:45:52Z",
-  "graded_at": "2026-10-01T15:46:07.695030+00:00",
+  "graded_at": "2026-10-01T15:46:35.597716+00:00",
   "task_id": "A01",
   "task_version": 1,
   "name": "教师测试（虚拟数据）",
   "class_name": "测试班",
   "status": "graded",
-  "score": 90,
+  "score": 95.0,
   "auto_score": 90,
   "maximum": 100,
   "checks": [
@@ -77,7 +77,11 @@
     }
   ],
   "late": false,
-  "manual_review": null,
+  "manual_review": {
+    "by": "cupzhoutianhang",
+    "reason": "教师测试：验证人工复核记录与成绩导出，非真实学生成绩。",
+    "at": "2026-10-01T15:46:35.597716+00:00"
+  },
   "error": "",
   "is_test": true,
   "history": [
@@ -87,6 +91,16 @@
       "graded_at": "2026-10-01T15:45:42.702518+00:00",
       "score": 100,
       "auto_score": 100,
+      "manual_review": null,
+      "task_version": 1,
+      "status": "graded"
+    },
+    {
+      "submission_hash": "ed2f57040eb3de3af1849d927995851cfae027109983e80b6849fca978c26219",
+      "submitted_at": "2026-10-01T15:45:52Z",
+      "graded_at": "2026-10-01T15:46:07.695030+00:00",
+      "score": 90,
+      "auto_score": 90,
       "manual_review": null,
       "task_version": 1,
       "status": "graded"
