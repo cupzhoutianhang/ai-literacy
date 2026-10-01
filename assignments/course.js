@@ -4,7 +4,7 @@
   let tasks = [];
   const $ = id => document.getElementById(id);
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const safePath = value => typeof value === 'string' && /^(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_.-]+$/.test(value) && !value.split('/').includes('..');
+  const safePath = value => typeof value === 'string' && /^[^\\<>:"|?*\u0000-\u001f]+$/.test(value) && value.split('/').every(part => part && part !== '.' && part !== '..');
   const submitUrl = task => repo + '/issues/new?template=' + task.id.toLowerCase() + '.yml';
   function deadline(task) {
     if (!task.deadline) return '开放练习 · 未设截止';
@@ -12,7 +12,7 @@
   }
   function renderTasks() {
     $('task-count').textContent = tasks.length + ' 项任务 · 每题 100 分';
-    $('task-list').innerHTML = tasks.map(task => '<article class="task-card" data-task="' + esc(task.id) + '"><span class="task-id">' + esc(task.id) + ' / 豆包工作</span><h3>' + esc(task.title) + '</h3><p>' + esc(task.brief) + '</p><div class="meta">相关讲次 ' + task.lessons.map(n => 'L' + String(n).padStart(2,'0')).join(' / ') + ' · 约 ' + esc(task.minutes) + ' 分钟<br>' + esc(deadline(task)) + '</div><button class="button" type="button" data-open="' + esc(task.id) + '">查看题目与附件 →</button></article>').join('');
+    $('task-list').innerHTML = tasks.map(task => '<article class="task-card" data-task="' + esc(task.id) + '"><span class="task-id">' + esc(task.id) + ' / 豆包工作</span><h3>' + esc(task.title) + '</h3><p>' + esc(task.brief) + '</p><div class="meta">相关讲次 ' + task.lessons.map(n => esc('L' + String(n).padStart(2,'0'))).join(' / ') + ' · 约 ' + esc(task.minutes) + ' 分钟<br>' + esc(deadline(task)) + '</div><button class="button" type="button" data-open="' + esc(task.id) + '">查看题目与附件 →</button></article>').join('');
     $('preview-task').innerHTML = tasks.map(task => '<option value="' + esc(task.id) + '">' + esc(task.id + ' · ' + task.title) + '</option>').join('');
   }
   function showTask(id, scroll) {

@@ -44,6 +44,8 @@ def load_catalog():
         if not re.fullmatch(r'A\d{2}', task['id']) or task['id'] in ids:
             raise ValueError('任务编号格式错误或重复')
         ids.add(task['id'])
+        if not task['lessons'] or any(type(n) is not int or not 1 <= n <= 11 for n in task['lessons']):
+            raise ValueError('相关讲次必须是1至11的整数')
         if sum(rule['points'] for rule in task['rubric']) + task['process_points'] != 100:
             raise ValueError('每题评分之和必须为100')
         if task['process_points'] != 20:
