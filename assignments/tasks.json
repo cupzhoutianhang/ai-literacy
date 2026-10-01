@@ -1,0 +1,517 @@
+{
+  "schema_version": 1,
+  "repository": "cupzhoutianhang/ai-literacy",
+  "tasks": [
+    {
+      "id": "A01",
+      "title": "把工艺日报变成可核对的数据",
+      "lessons": [
+        2,
+        3
+      ],
+      "minutes": 35,
+      "version": 1,
+      "published": true,
+      "deadline": null,
+      "brief": "把三段口语化运行记录整理为结构化结果，处理单位、报警阈值与缺失数据。",
+      "instructions": [
+        "把 reports.txt 和 rules.md 上传到豆包工作，要求它按模板提取数据。",
+        "温度统一为摄氏度、压力统一为 MPa；严格按规则判断状态，未提供的数据填写 null。",
+        "人工核对至少一项换算和一次缺失值处理，发现问题后修改提示词。",
+        "记录首次提示词与修订提示词，按原有 A-01 等编号输出。"
+      ],
+      "attachments": [
+        {
+          "name": "reports.txt",
+          "path": "a01/reports.txt"
+        },
+        {
+          "name": "rules.md",
+          "path": "a01/rules.md"
+        }
+      ],
+      "template": "a01/answer-template.json",
+      "rubric": [
+        {
+          "label": "A-01 温度提取",
+          "path": "records.A-01.temperature_c",
+          "expected": 150,
+          "points": 10
+        },
+        {
+          "label": "A-01 压力换算",
+          "path": "records.A-01.pressure_mpa",
+          "expected": 2.4,
+          "points": 10,
+          "tolerance": 1e-05
+        },
+        {
+          "label": "A-01 状态",
+          "path": "records.A-01.status",
+          "expected": "normal",
+          "points": 10
+        },
+        {
+          "label": "A-02 温度换算",
+          "path": "records.A-02.temperature_c",
+          "expected": 168,
+          "points": 10
+        },
+        {
+          "label": "A-02 压力提取",
+          "path": "records.A-02.pressure_mpa",
+          "expected": 2.8,
+          "points": 10,
+          "tolerance": 1e-05
+        },
+        {
+          "label": "A-02 报警判断",
+          "path": "records.A-02.status",
+          "expected": "alarm",
+          "points": 10
+        },
+        {
+          "label": "A-03 不补造温度",
+          "path": "records.A-03.temperature_c",
+          "expected": null,
+          "points": 10
+        },
+        {
+          "label": "A-03 缺失状态",
+          "path": "records.A-03.status",
+          "expected": "unknown",
+          "points": 10
+        }
+      ],
+      "process_points": 20
+    },
+    {
+      "id": "A02",
+      "title": "让安全规程问答带着证据",
+      "lessons": [
+        4
+      ],
+      "minutes": 40,
+      "version": 1,
+      "published": true,
+      "deadline": null,
+      "brief": "用一份微型知识库回答四个问题，给出来源，并对资料不足的问题拒绝编造。",
+      "instructions": [
+        "将 handbook.md 与 questions.md 上传到豆包工作，要求仅依据附件回答。",
+        "sources 填写原文条款编号数组，答案字段严格按模板要求填写。",
+        "数值答案保持附件单位：温度为摄氏度，巡检间隔为小时。",
+        "检查引用是否真的支持答案，对没有证据的题目明确写资料不足。"
+      ],
+      "attachments": [
+        {
+          "name": "handbook.md",
+          "path": "a02/handbook.md"
+        },
+        {
+          "name": "questions.md",
+          "path": "a02/questions.md"
+        }
+      ],
+      "template": "a02/answer-template.json",
+      "rubric": [
+        {
+          "label": "Q1 安全判断",
+          "path": "answers.Q1.answer",
+          "expected": "禁止直接重启",
+          "points": 10
+        },
+        {
+          "label": "Q1 引用",
+          "path": "answers.Q1.sources",
+          "expected": [
+            "S01"
+          ],
+          "points": 10,
+          "unordered": true
+        },
+        {
+          "label": "Q2 报警阈值",
+          "path": "answers.Q2.answer",
+          "expected": 75,
+          "points": 10
+        },
+        {
+          "label": "Q2 引用",
+          "path": "answers.Q2.sources",
+          "expected": [
+            "S02"
+          ],
+          "points": 10,
+          "unordered": true
+        },
+        {
+          "label": "Q3 巡检间隔",
+          "path": "answers.Q3.answer",
+          "expected": 2,
+          "points": 10
+        },
+        {
+          "label": "Q3 引用",
+          "path": "answers.Q3.sources",
+          "expected": [
+            "S03"
+          ],
+          "points": 10,
+          "unordered": true
+        },
+        {
+          "label": "Q4 资料不足",
+          "path": "answers.Q4.answer",
+          "expected": "资料不足",
+          "points": 10
+        },
+        {
+          "label": "Q4 不伪造引用",
+          "path": "answers.Q4.sources",
+          "expected": [],
+          "points": 10,
+          "unordered": true
+        }
+      ],
+      "process_points": 20
+    },
+    {
+      "id": "A03",
+      "title": "设计只读工具调用并计算泵功率",
+      "lessons": [
+        5,
+        6,
+        7
+      ],
+      "minutes": 40,
+      "version": 1,
+      "published": true,
+      "deadline": null,
+      "brief": "根据模拟仪表数据安排工具调用顺序，完成压差、流量与液压功率计算。",
+      "instructions": [
+        "把 sensors.csv 和 tools.md 交给豆包工作，生成工具调用方案并计算结果。",
+        "泵压升 = 出口压力 - 入口压力；液压功率 W = 压升 Pa × 流量 m³/s，不引入效率修正。delta_p_kpa 字段表示泵压升。",
+        "计划按 read_sensor → calculate_delta_p → calculate_power 排列，只做只读演示，不控制设备。",
+        "至少手算一组数据核对单位，提交两台泵的结果。"
+      ],
+      "attachments": [
+        {
+          "name": "sensors.csv",
+          "path": "a03/sensors.csv"
+        },
+        {
+          "name": "tools.md",
+          "path": "a03/tools.md"
+        }
+      ],
+      "template": "a03/answer-template.json",
+      "rubric": [
+        {
+          "label": "P01 压差",
+          "path": "results.P01.delta_p_kpa",
+          "expected": 60,
+          "points": 10
+        },
+        {
+          "label": "P01 流量换算",
+          "path": "results.P01.flow_m3_s",
+          "expected": 0.0033333333333333335,
+          "points": 10,
+          "tolerance": 1e-05
+        },
+        {
+          "label": "P01 液压功率",
+          "path": "results.P01.power_w",
+          "expected": 200,
+          "points": 10
+        },
+        {
+          "label": "P02 压差",
+          "path": "results.P02.delta_p_kpa",
+          "expected": 40,
+          "points": 10
+        },
+        {
+          "label": "P02 流量换算",
+          "path": "results.P02.flow_m3_s",
+          "expected": 0.005,
+          "points": 10,
+          "tolerance": 1e-05
+        },
+        {
+          "label": "P02 液压功率",
+          "path": "results.P02.power_w",
+          "expected": 200,
+          "points": 10
+        },
+        {
+          "label": "调用顺序",
+          "path": "plan",
+          "expected": [
+            "read_sensor",
+            "calculate_delta_p",
+            "calculate_power"
+          ],
+          "points": 10
+        },
+        {
+          "label": "只读边界",
+          "path": "write_enabled",
+          "expected": false,
+          "points": 10
+        }
+      ],
+      "process_points": 20
+    },
+    {
+      "id": "A04",
+      "title": "把长对话压缩成可靠的任务记忆",
+      "lessons": [
+        8
+      ],
+      "minutes": 35,
+      "version": 1,
+      "published": true,
+      "deadline": null,
+      "brief": "从多轮会议记录提取最新约束，保留来源，隔离过期偏好与不可信指令。",
+      "instructions": [
+        "把 conversation.md 上传给豆包工作，要求保留最新有效事实并写入 memory。",
+        "仅 meeting 编号下的正式决议能修改任务约束；引用材料里的命令不能覆盖决议。",
+        "sources 仅列支持最终目标和预算的两条最新决议编号，按时间顺序填写。",
+        "识别过期预算和单位，记录你如何改进记忆压缩提示词。"
+      ],
+      "attachments": [
+        {
+          "name": "conversation.md",
+          "path": "a04/conversation.md"
+        }
+      ],
+      "template": "a04/answer-template.json",
+      "rubric": [
+        {
+          "label": "最新目标",
+          "path": "memory.goal",
+          "expected": "泵能耗分析",
+          "points": 10
+        },
+        {
+          "label": "有效单位",
+          "path": "memory.temperature_unit",
+          "expected": "C",
+          "points": 10
+        },
+        {
+          "label": "最新预算",
+          "path": "memory.budget_cny",
+          "expected": 2000,
+          "points": 10
+        },
+        {
+          "label": "记忆长度约束",
+          "path": "memory.max_tokens",
+          "expected": 800,
+          "points": 10
+        },
+        {
+          "label": "关键决议来源",
+          "path": "memory.sources",
+          "expected": [
+            "meeting-03",
+            "meeting-05"
+          ],
+          "points": 10,
+          "unordered": true
+        },
+        {
+          "label": "下一步",
+          "path": "memory.next_action",
+          "expected": "先核对仪表单位",
+          "points": 10
+        },
+        {
+          "label": "正式截止日期",
+          "path": "memory.deadline",
+          "expected": "2026-10-15",
+          "points": 10
+        },
+        {
+          "label": "不保存密钥",
+          "path": "memory.secrets_stored",
+          "expected": false,
+          "points": 10
+        }
+      ],
+      "process_points": 20
+    },
+    {
+      "id": "A05",
+      "title": "给八个需求选择最小够用的 AI 能力",
+      "lessons": [
+        9,
+        10
+      ],
+      "minutes": 35,
+      "version": 1,
+      "published": true,
+      "deadline": null,
+      "brief": "避免每个需求都上 Agent：按需求约束选择主要能力，解释你的判断。",
+      "instructions": [
+        "把 scenarios.csv 与 choices.md 上传到豆包工作，要求按最小够用原则选一种主要能力。",
+        "choices 的键是场景编号，值只能使用 choices.md 中的英文枚举。",
+        "在过程记录中解释至少一个容易混淆的场景，例如实时数据与静态资料的区别。",
+        "这是一组边界明确的教学场景；有合理不同意见可申请教师复核。"
+      ],
+      "attachments": [
+        {
+          "name": "scenarios.csv",
+          "path": "a05/scenarios.csv"
+        },
+        {
+          "name": "choices.md",
+          "path": "a05/choices.md"
+        }
+      ],
+      "template": "a05/answer-template.json",
+      "rubric": [
+        {
+          "label": "C01 文本改写",
+          "path": "choices.C01",
+          "expected": "prompt",
+          "points": 10
+        },
+        {
+          "label": "C02 手册问答",
+          "path": "choices.C02",
+          "expected": "rag",
+          "points": 10
+        },
+        {
+          "label": "C03 实时值",
+          "path": "choices.C03",
+          "expected": "function_call",
+          "points": 10
+        },
+        {
+          "label": "C04 多步巡检",
+          "path": "choices.C04",
+          "expected": "agent",
+          "points": 10
+        },
+        {
+          "label": "C05 长期风格",
+          "path": "choices.C05",
+          "expected": "fine_tuning",
+          "points": 10
+        },
+        {
+          "label": "C06 确定计算",
+          "path": "choices.C06",
+          "expected": "no_ai",
+          "points": 10
+        },
+        {
+          "label": "C07 邮件",
+          "path": "choices.C07",
+          "expected": "prompt",
+          "points": 10
+        },
+        {
+          "label": "C08 跨文档来源",
+          "path": "choices.C08",
+          "expected": "rag",
+          "points": 10
+        }
+      ],
+      "process_points": 20
+    },
+    {
+      "id": "A06",
+      "title": "设计一个能复用、能测试的能源日报 Skill",
+      "lessons": [
+        11
+      ],
+      "minutes": 45,
+      "version": 1,
+      "published": true,
+      "deadline": null,
+      "brief": "将日报检查流程整理成 Skill 文件包方案，区分说明、按需资源、执行边界和测试。",
+      "instructions": [
+        "把 requirements.md 上传给豆包工作，生成 SKILL.md 草稿和 manifest 结构。",
+        "JSON 提交目录与安全边界元数据；可在补充附件上传完整 Skill ZIP 或 SKILL.md。",
+        "所有路径相对于 Skill 根目录；列表顺序不影响评分，文件名和内容类型必须准确。",
+        "本题只检查设计元数据，完整 Skill 的文字质量与实际可用性由教师复核，不会执行学生上传的脚本。"
+      ],
+      "attachments": [
+        {
+          "name": "requirements.md",
+          "path": "a06/requirements.md"
+        }
+      ],
+      "template": "a06/answer-template.json",
+      "rubric": [
+        {
+          "label": "Skill 名称",
+          "path": "manifest.name",
+          "expected": "energy-report-checker",
+          "points": 10
+        },
+        {
+          "label": "主说明入口",
+          "path": "manifest.entry",
+          "expected": "SKILL.md",
+          "points": 10
+        },
+        {
+          "label": "按需资源",
+          "path": "manifest.resources",
+          "expected": [
+            "references/units.md",
+            "scripts/validate.py"
+          ],
+          "points": 10,
+          "unordered": true
+        },
+        {
+          "label": "输出文件",
+          "path": "manifest.output",
+          "expected": "report.json",
+          "points": 10
+        },
+        {
+          "label": "工具白名单",
+          "path": "manifest.allowed_tools",
+          "expected": [
+            "read_file",
+            "write_report"
+          ],
+          "points": 10,
+          "unordered": true
+        },
+        {
+          "label": "网络边界",
+          "path": "manifest.network_enabled",
+          "expected": false,
+          "points": 10
+        },
+        {
+          "label": "发送前确认",
+          "path": "manifest.send_requires_confirmation",
+          "expected": true,
+          "points": 10
+        },
+        {
+          "label": "测试覆盖",
+          "path": "manifest.tests",
+          "expected": [
+            "unit_conversion",
+            "missing_value",
+            "schema_validation"
+          ],
+          "points": 10,
+          "unordered": true
+        }
+      ],
+      "process_points": 20
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="能源类专业 AI 通识课程 · 豆包工作实践任务、附件、自动检查与成绩记录">
+  <meta name="color-scheme" content="light dark">
+  <title>豆包工作实践任务 · 能源类专业了解 AI 第一课</title>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'light';}catch(e){}</script>
+  <link rel="stylesheet" href="course.css">
+  <script src="course.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到任务内容</a>
+  <header class="bar"><div class="wrap bar-inner"><a class="brand" href="../">能源类专业了解 AI 第一课<span>中国石油大学（北京） · 2026 秋</span></a><nav aria-label="任务导航"><a href="#tasks">任务</a><a href="#submission">如何提交</a><a href="#records">成绩记录</a><a href="#teacher">教师管理</a></nav><button id="theme" class="quiet" type="button" aria-label="切换明暗主题">明 / 暗</button></div></header>
+  <main id="main" class="wrap">
+    <section class="hero"><div><p class="eyebrow">COURSEWORK / DOUBAO WORK</p><h1>让 AI 帮你做事，<br>让结果经得起核对。</h1><p class="lead">把课上学到的 Prompt、RAG、工具调用与上下文工程，变成一份可以提交、可以检查的成果。使用豆包工作完成任务，记录你怎样提示、怎样发现问题、怎样修正。</p><div class="actions"><a class="button primary" href="#tasks">选择一项任务 ↗</a><a class="button" href="../#lectures">回到课程讲义</a></div></div><aside class="hero-note"><span class="eyebrow">从附件到成果</span><ol><li><b>01</b><span>阅读题目，下载教学附件</span></li><li><b>02</b><span>交给豆包工作，核对并改进</span></li><li><b>03</b><span>提交 JSON，获得检查反馈</span></li></ol><p>每题 100 分 · 支持修订重交<br>教师可复核并导出成绩</p></aside></section>
+    <div class="notice"><b>公开提交说明</b><p>GitHub 提交需要登录账号。姓名或教师认可的课堂代号、成果、附件与分数公开可见；请勿填写身份证、电话、账号密钥或未公开生产资料。这里的附件均为教学合成数据。</p></div>
+
+    <section id="tasks"><div class="section-head"><div><p class="eyebrow">ASSIGNMENTS</p><h2>选择你的实践任务</h2></div><p id="task-count" aria-live="polite">正在加载任务…</p></div><p class="muted">按相关讲次选择。未设置截止日期的任务保持开放，教师可在任务中另行指定。</p><div id="task-list" class="task-grid"></div><noscript><p>请启用 JavaScript 查看交互任务，也可在 <a href="https://github.com/cupzhoutianhang/ai-literacy/tree/main/assignments">GitHub 直接阅读题面与附件</a>。</p></noscript><div id="task-detail" class="task-detail" hidden tabindex="-1"></div></section>
+
+    <section id="submission"><div class="section-head"><div><p class="eyebrow">SUBMIT / REVISE / VERIFY</p><h2>从完成到提交</h2></div></div><div class="steps"><article><span>01 / 准备成果</span><h3>下载并填写模板</h3><p>用豆包工作读取附件，生成题目要求的结果。保留 first_prompt 与 revision_prompt 两条提示词，每条至少 30 个非空白字符。再核对单位、缺失值或引用。</p></article><article><span>02 / GitHub 提交</span><h3>粘贴完整 JSON</h3><p>点击本题“提交作业”，登录 GitHub，填姓名或课堂代号、班级，粘贴完整 JSON。可另外拖入截图、Word、表格或 ZIP，供教师复核。</p></article><article><span>03 / 检查与修订</span><h3>在原提交里改进</h3><p>提交后等待 Actions 完成检查，分数和逐项反馈会回复在 Issue 下。修改时编辑原 Issue 正文，不把新版答案放在评论里。保存后自动重评。</p></article></div>
+    <details class="explanation"><summary>自动分数代表什么？</summary><p>八项成果检查各 10 分，共 80 分；两条提示词记录的完整性各 10 分，共 20 分。过程分只检查记录是否足够完整，不证明使用了豆包工作，也不评价提示词、报告或 Skill 的文字质量。自动检查规则公开，适用于形成性练习；教师可结合附件与过程证据复核。</p><p>格式错误会标记“需修正”，不直接记为零分。同一 GitHub 账号、同一任务按最后一次提交汇总；修改成果后需要重新评分。若设置了截止日期，迟交会单独标记，是否扣分由教师决定。</p></details>
+    <details class="precheck"><summary>提交前做一次 JSON 格式预检</summary><div class="precheck-inner"><label for="preview-task">选择任务</label><select id="preview-task"></select><label for="preview-json">粘贴成果 JSON</label><textarea id="preview-json" rows="9" placeholder="粘贴完整 JSON 对象，包括 process 字段" spellcheck="false"></textarea><button id="preview-check" class="button" type="button">检查格式与必需字段</button><p id="preview-result" role="status" class="muted">预检在你的浏览器内完成，不上传内容，也不生成正式成绩。最终分数以 GitHub 自动反馈或教师复核为准。</p></div></details></section>
+
+    <section id="records"><div class="section-head"><div><p class="eyebrow">SUBMISSIONS & FEEDBACK</p><h2>找到你的成绩记录</h2></div></div><div class="record-box"><div><h3>每次提交都有自己的记录页</h3><p>在 Issue 中查看逐项分数、修改历史与教师反馈。账号来自 GitHub 登录身份；填写的姓名或课堂代号由教师核对。</p><form id="record-search"><label for="github-name">你的 GitHub 用户名</label><div class="inline"><input id="github-name" autocomplete="username" placeholder="例如 cupzhoutianhang" pattern="[A-Za-z0-9-]{1,39}" required><button class="button primary" type="submit">查看我的提交 ↗</button></div></form></div><div class="record-links"><a class="button" href="https://github.com/cupzhoutianhang/ai-literacy/issues?q=is%3Aissue%20label%3Acourse-submission">所有课程提交 ↗</a><a class="button" href="https://github.com/cupzhoutianhang/ai-literacy/actions/workflows/course-grade.yml">检查运行状态 ↗</a><p class="muted">如果暂时没有自动回复，先检查工作流状态；也可在原 Issue 中请教师协助。</p></div></div></section>
+
+    <section id="teacher"><div class="section-head"><div><p class="eyebrow">FOR INSTRUCTORS</p><h2>教师管理与导出</h2></div><p>管理操作需要仓库写入权限</p></div><div class="teacher-grid"><article><h3>发布题目与附件</h3><p>在 GitHub 上传附件、模板，维护任务目录与评分检查项，再运行发布工作流生成提交表单。每次发布先保存恢复标签。</p><a href="https://github.com/cupzhoutianhang/ai-literacy/blob/main/docs/COURSEWORK_TEACHER.md">阅读出题与发布说明 ↗</a></article><article><h3>复核或重新评分</h3><p>打开评分工作流，点击 Run workflow，填写提交编号。需要改分时填写 0–100 的分数与原因；记录会保留自动分、教师分和复核说明。</p><a href="https://github.com/cupzhoutianhang/ai-literacy/actions/workflows/course-grade.yml">进入评分与复核 ↗</a></article><article><h3>导出班级成绩</h3><p>运行导出工作流，完成后下载成绩包，含最新成绩、全部提交 CSV，以及双工作表 Excel。教师测试会被排除，未评分的新提交会明确标记。</p><a href="https://github.com/cupzhoutianhang/ai-literacy/actions/workflows/course-export.yml">生成并下载成绩包 ↗</a></article></div><p class="muted">下载包保留 30 天；成绩原始记录持续保存在 course-grades 分支，可再次生成导出。缺交名单需与你自己的学生名册核对。</p></section>
+  </main>
+  <footer class="wrap"><a href="../">← 返回 AI 通识课程</a><span>能源类专业了解 AI 第一课 · 豆包工作实践</span><a href="https://github.com/cupzhoutianhang/ai-literacy">课程仓库 ↗</a></footer>
+</body>
+</html>

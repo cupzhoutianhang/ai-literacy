@@ -1,0 +1,28 @@
+name: Course - Check assignment system
+on:
+  push:
+    branches: [main]
+    paths: ['assignments/**', 'scripts/course*', 'scripts/build_course_forms.py', 'tests/test_course*', '.github/**', 'index.html']
+  pull_request:
+    paths: ['assignments/**', 'scripts/course*', 'scripts/build_course_forms.py', 'tests/test_course*', '.github/**', 'index.html']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            assignments
+            tests
+            .github/ISSUE_TEMPLATE
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/build_course_forms.py --check
+      - run: python -m unittest discover -s tests -p 'test_course*.py' -v
+      - run: node --check assignments/course.js

@@ -1,0 +1,22 @@
+{
+  "records": {
+    "A-01": {
+      "temperature_c": null,
+      "pressure_mpa": null,
+      "status": ""
+    },
+    "A-02": {
+      "temperature_c": null,
+      "pressure_mpa": null,
+      "status": ""
+    },
+    "A-03": {
+      "temperature_c": null,
+      "status": ""
+    }
+  },
+  "process": {
+    "first_prompt": "",
+    "revision_prompt": ""
+  }
+}

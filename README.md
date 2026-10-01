@@ -4,6 +4,8 @@
 
 **🌐 课程主页: <https://cupzhoutianhang.github.io/ai-literacy/>** (在线浏览全部讲义)
 
+**豆包工作实践任务：<https://cupzhoutianhang.github.io/ai-literacy/assignments/>**。六项课程任务提供题面、教学附件、JSON 模板、GitHub 提交与自动反馈；教师可复核并导出 CSV / Excel。[教师出题、导出与回退说明](docs/COURSEWORK_TEACHER.md)。
+
 - **主讲**: 周天航
 - **单位**: 中国石油大学 (北京) 未来能源学院 · 重质油全国重点实验室
 - **时间**: 2026 年秋季学期

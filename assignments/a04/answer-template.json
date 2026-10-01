@@ -1,0 +1,16 @@
+{
+  "memory": {
+    "goal": "",
+    "temperature_unit": "",
+    "budget_cny": null,
+    "max_tokens": null,
+    "sources": [],
+    "next_action": "",
+    "deadline": "",
+    "secrets_stored": null
+  },
+  "process": {
+    "first_prompt": "",
+    "revision_prompt": ""
+  }
+}

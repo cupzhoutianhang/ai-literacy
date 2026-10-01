@@ -1,0 +1,16 @@
+{
+  "manifest": {
+    "name": "",
+    "entry": "",
+    "resources": [],
+    "output": "",
+    "allowed_tools": [],
+    "network_enabled": null,
+    "send_requires_confirmation": null,
+    "tests": []
+  },
+  "process": {
+    "first_prompt": "",
+    "revision_prompt": ""
+  }
+}

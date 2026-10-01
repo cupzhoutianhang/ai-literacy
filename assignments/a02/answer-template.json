@@ -1,0 +1,24 @@
+{
+  "answers": {
+    "Q1": {
+      "answer": null,
+      "sources": []
+    },
+    "Q2": {
+      "answer": null,
+      "sources": []
+    },
+    "Q3": {
+      "answer": null,
+      "sources": []
+    },
+    "Q4": {
+      "answer": null,
+      "sources": []
+    }
+  },
+  "process": {
+    "first_prompt": "",
+    "revision_prompt": ""
+  }
+}

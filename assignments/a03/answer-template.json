@@ -1,0 +1,20 @@
+{
+  "results": {
+    "P01": {
+      "delta_p_kpa": null,
+      "flow_m3_s": null,
+      "power_w": null
+    },
+    "P02": {
+      "delta_p_kpa": null,
+      "flow_m3_s": null,
+      "power_w": null
+    }
+  },
+  "plan": [],
+  "write_enabled": null,
+  "process": {
+    "first_prompt": "",
+    "revision_prompt": ""
+  }
+}

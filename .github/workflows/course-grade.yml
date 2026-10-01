@@ -1,0 +1,46 @@
+name: Course - Grade submission
+on:
+  issues:
+    types: [opened, edited, reopened]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: '提交 Issue 编号（不是任务编号）'
+        required: true
+        type: string
+      manual_score:
+        description: '教师复核最终分数 0–100；留空则运行自动检查'
+        required: false
+        type: string
+      review_reason:
+        description: '人工改分原因；改分时必填'
+        required: false
+        type: string
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: course-grade-${{ github.event.issue.number || inputs.issue_number }}
+  cancel-in-progress: false
+jobs:
+  grade:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.issue.labels.*.name, 'course-submission') || startsWith(github.event.issue.title, '[作业 A') || startsWith(github.event.issue.title, '[教师测试]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            assignments
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Check submission and save authoritative result
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COURSE_ISSUE_NUMBER: ${{ inputs.issue_number }}
+          COURSE_MANUAL_SCORE: ${{ inputs.manual_score }}
+          COURSE_REVIEW_REASON: ${{ inputs.review_reason }}
+        run: python scripts/course_github.py grade
