@@ -3,16 +3,16 @@
   "issue_number": 1,
   "issue_url": "https://github.com/cupzhoutianhang/ai-literacy/issues/1",
   "github_login": "cupzhoutianhang",
-  "submission_hash": "e422bdf5a9c7e4b07d23ef367c980a0e86055b767a969d322aed062a71c2e567",
-  "submitted_at": "2026-10-01T15:45:28Z",
-  "graded_at": "2026-10-01T15:45:42.702518+00:00",
+  "submission_hash": "ed2f57040eb3de3af1849d927995851cfae027109983e80b6849fca978c26219",
+  "submitted_at": "2026-10-01T15:45:52Z",
+  "graded_at": "2026-10-01T15:46:07.695030+00:00",
   "task_id": "A01",
   "task_version": 1,
   "name": "教师测试（虚拟数据）",
   "class_name": "测试班",
   "status": "graded",
-  "score": 100,
-  "auto_score": 100,
+  "score": 90,
+  "auto_score": 90,
   "maximum": 100,
   "checks": [
     {
@@ -24,8 +24,8 @@
     {
       "label": "A-01 压力换算",
       "points": 10,
-      "earned": 10,
-      "passed": true
+      "earned": 0,
+      "passed": false
     },
     {
       "label": "A-01 状态",
@@ -80,5 +80,16 @@
   "manual_review": null,
   "error": "",
   "is_test": true,
-  "history": []
+  "history": [
+    {
+      "submission_hash": "e422bdf5a9c7e4b07d23ef367c980a0e86055b767a969d322aed062a71c2e567",
+      "submitted_at": "2026-10-01T15:45:28Z",
+      "graded_at": "2026-10-01T15:45:42.702518+00:00",
+      "score": 100,
+      "auto_score": 100,
+      "manual_review": null,
+      "task_version": 1,
+      "status": "graded"
+    }
+  ]
 }
