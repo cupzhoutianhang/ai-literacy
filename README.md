@@ -4,6 +4,8 @@
 
 **🌐 课程主页: <https://cupzhoutianhang.github.io/ai-literacy/>** (在线浏览全部讲义)
 
+**课前视频：[从现在看过去：AI 简史](https://cupzhoutianhang.github.io/ai-literacy/#videos)**。首页可直接播放或下载 1080P MP4（6 分 29 秒）。视频来自 Bilibili UP 主 [铼夏LAYccc](https://space.bilibili.com/60729919)，[原视频 BV1H8av6HEYs](https://www.bilibili.com/video/BV1H8av6HEYs/)；来源及网页版本说明见 [assets/videos/README.md](assets/videos/README.md)。
+
 **豆包工作实践任务：<https://cupzhoutianhang.github.io/ai-literacy/assignments/>**。六项课程任务提供题面、教学附件、JSON 模板、GitHub 提交与自动反馈；教师可复核并导出 CSV / Excel。[教师出题、导出与回退说明](docs/COURSEWORK_TEACHER.md)。
 
 - **主讲**: 周天航

@@ -450,6 +450,15 @@
   @media (max-width: 900px) { .project-hero { grid-template-columns: 1fr; } .project-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .hero { padding-top: 50px; } .hero::before { top: 16px; right: 20px; } .demo { transform: none; } .project-grid { grid-template-columns: 1fr; } .project-stats { grid-template-columns: repeat(3, 1fr); } .project-stat { padding: 12px 9px; } .project-stat b { font-size: 21px; } }
 
+  /* ================= 课程导入视频 ================= */
+  .course-video { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 18px;
+                  background: var(--paper); box-shadow: var(--shadow-2); }
+  .course-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #08080c; }
+  .course-video figcaption { padding: 22px; }
+  .course-video h3 { margin: 0 0 8px; font-size: 22px; }
+  .course-video-meta { margin: 0 0 14px; color: var(--ink-2); font-size: 14px; }
+  .course-video-source { margin: 16px 0 0; color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+  @media (max-width: 560px) { .course-video figcaption { padding: 16px; } }
 </style>
 </head>
 <body>
@@ -483,6 +492,7 @@
   <div class="container bar-in">
     <a class="brand" href="#top">周天航's wiki<small>for AI</small></a>
     <nav aria-label="页面导航">
+      <a href="#videos">视频</a>
       <a href="#roadmap">路线图</a>
       <a href="#lectures">讲义</a>
       <a href="#projects">实验</a>
@@ -515,6 +525,7 @@
           <a class="btn primary" href="slides/01-AI大模型到底是什么.pdf">从第一讲开始
             <svg aria-hidden="true"><use href="#i-in"/></svg></a>
           <a class="btn" href="#lectures">浏览全部讲义</a>
+          <a class="btn" href="#videos">观看 AI 简史</a>
           <a class="btn" href="#projects">配套实验代码</a>
           <a class="btn" href="https://github.com/cupzhoutianhang/ai-literacy/archive/refs/heads/main.zip">
             <svg aria-hidden="true"><use href="#i-dl"/></svg>打包下载</a>
@@ -541,6 +552,35 @@
       <div class="stat"><b data-to="112">112</b><span>张原创示意图</span></div>
     </div>
   </div>
+
+  <!-- ============ 课程导入视频 ============ -->
+  <section id="videos" aria-labelledby="videos-heading">
+    <div class="container">
+      <div class="sec-head">
+        <h2 id="videos-heading"><small>WATCH / AI HISTORY</small>先看一段 AI 简史</h2>
+        <p>用一段短片开启这门课，回看人工智能的发展历程。</p>
+      </div>
+      <figure class="course-video">
+        <video controls playsinline preload="none" width="1920" height="1080"
+               poster="assets/videos/ai-history-poster.jpg" aria-label="从现在看过去：AI 简史"
+               aria-describedby="ai-history-source">
+          <source src="assets/videos/ai-history-BV1H8av6HEYs-1080p.mp4" type="video/mp4">
+          你的浏览器暂不支持视频播放，可以<a href="assets/videos/ai-history-BV1H8av6HEYs-1080p.mp4" download>下载 MP4 视频</a>观看。
+        </video>
+        <figcaption>
+          <h3>从现在看过去：AI 简史</h3>
+          <p class="course-video-meta">课前导入 · 6 分 29 秒 · 1080P · 含声音与画面字幕</p>
+          <div class="cta">
+            <a class="btn primary" href="assets/videos/ai-history-BV1H8av6HEYs-1080p.mp4" download="AI简史-1080P.mp4">
+              <svg aria-hidden="true"><use href="#i-dl"/></svg>下载视频</a>
+            <a class="btn" href="https://www.bilibili.com/video/BV1H8av6HEYs/" target="_blank" rel="noopener noreferrer">在 B 站观看原视频 ↗</a>
+          </div>
+          <p class="course-video-source" id="ai-history-source">视频来源：Bilibili · <a href="https://space.bilibili.com/60729919" target="_blank" rel="noopener noreferrer">铼夏LAYccc</a>。
+            原标题《震惊瘫坐！Opus 5.5生成-从现在看过去-AI简史》，BV1H8av6HEYs。</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
 
   <!-- ============ 路线图 ============ -->
   <section id="roadmap">
