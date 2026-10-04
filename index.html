@@ -306,6 +306,8 @@
   .info dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; }
   .info dt { color: var(--muted); }
   .info dd { margin: 0; }
+  .info .instructor { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+  .instructor a { white-space: nowrap; }
 
   blockquote { margin: 56px auto 0; max-width: 760px; text-align: center; font-family: var(--hand); font-size: clamp(20px, 2.6vw, 26px);
                line-height: 1.6; color: var(--ink); }
@@ -744,7 +746,12 @@
           <dl>
             <dt>面向</dt><dd>能源类专业 (化工、储能等)</dd>
             <dt>基础</dt><dd>零基础, 不需要编程经验</dd>
-            <dt>主讲</dt><dd>周天航</dd>
+            <dt>主讲</dt>
+            <dd class="instructor">
+              <span>周天航</span>
+              <a class="mini" href="https://www.researchgate.net/profile/Tianhang-Zhou-4" target="_blank" rel="noopener noreferrer" aria-label="周天航的 ResearchGate 主页（在新标签页打开）">ResearchGate ↗</a>
+              <a class="mini" href="https://scholar.google.de/citations?user=JJ64fp8AAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer" aria-label="周天航的 Google Scholar 谷歌学术主页（在新标签页打开）">Google Scholar ↗</a>
+            </dd>
             <dt>单位</dt><dd>中国石油大学 (北京) 未来能源学院<br>重质油全国重点实验室</dd>
           </dl>
         </div>
