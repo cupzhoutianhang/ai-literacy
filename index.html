@@ -296,18 +296,19 @@
   .route a:hover { text-decoration: none; outline: 1.5px solid var(--mi); }
   .route i { width: 10px; height: 2px; background: var(--line-2); display: inline-block; }
 
-  .notebox { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; margin-top: 16px; }
+  .notebox { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
   .note { display: flex; gap: 14px; background: var(--note-bg); border: 1px solid var(--note-line); border-radius: var(--radius); padding: 16px 18px; }
   .note .ico { font-size: 26px; line-height: 1; }
   .note b { font-family: var(--hand); font-size: 19px; display: inline-block; border-bottom: 2px solid var(--note-line); margin-bottom: 6px; }
   .note ul { margin: 4px 0 0; padding-left: 1.1em; font-size: 14.5px; }
   .note li { margin: 3px 0; }
   .info { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; font-size: 14.5px; }
-  .info dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; }
+  .info dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; }
   .info dt { color: var(--muted); }
   .info dd { margin: 0; }
   .info .instructor { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
   .instructor a { white-space: nowrap; }
+  .hero .info { margin: 0 0 20px; }
 
   blockquote { margin: 56px auto 0; max-width: 760px; text-align: center; font-family: var(--hand); font-size: clamp(20px, 2.6vw, 26px);
                line-height: 1.6; color: var(--ink); }
@@ -519,6 +520,20 @@
       <div>
         <span class="eyebrow"><span class="dot"></span>中国石油大学 (北京) · 课件全部公开</span>
         <h1>能源类专业<br>了解 <span class="ai">AI</span> 第一课</h1>
+        <div class="info" id="course-info" role="region" aria-label="课程基本信息">
+          <dl>
+            <dt>面向</dt><dd>能源类专业 (化工、储能等)</dd>
+            <dt>基础</dt><dd>零基础, 不需要编程经验</dd>
+            <dt>主讲</dt>
+            <dd class="instructor">
+              <span>周天航</span>
+              <a class="mini" href="https://www.researchgate.net/profile/Tianhang-Zhou-4" target="_blank" rel="noopener noreferrer" aria-label="周天航的 ResearchGate 主页（在新标签页打开）">ResearchGate ↗</a>
+              <a class="mini" href="https://scholar.google.de/citations?user=JJ64fp8AAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer" aria-label="周天航的 Google Scholar 谷歌学术主页（在新标签页打开）">Google Scholar ↗</a>
+            </dd>
+            <dt>助教</dt><dd>姜泽坤</dd>
+            <dt>单位</dt><dd>中国石油大学 (北京) 未来能源学院<br>重质油全国重点实验室</dd>
+          </dl>
+        </div>
         <p class="lede">从"大模型为什么只会预测下一个词"讲起, 一路讲到 RAG、工具调用、Agent 和微调。例子都来自装置、实验室和能源现场, 零基础就能跟上。</p>
         <div class="typer" aria-label="课程关键词">
           <span class="p">&gt;&gt;&gt;</span><span>这门课, 带你弄明白</span><span class="t" id="typed">预测下一个词</span><span class="caret" aria-hidden="true"></span>
@@ -741,20 +756,6 @@
               <li>页面里的链接都能点, 选的是国内网络可以直接打开的工具和文档。</li>
             </ul>
           </div>
-        </div>
-        <div class="info">
-          <dl>
-            <dt>面向</dt><dd>能源类专业 (化工、储能等)</dd>
-            <dt>基础</dt><dd>零基础, 不需要编程经验</dd>
-            <dt>主讲</dt>
-            <dd class="instructor">
-              <span>周天航</span>
-              <a class="mini" href="https://www.researchgate.net/profile/Tianhang-Zhou-4" target="_blank" rel="noopener noreferrer" aria-label="周天航的 ResearchGate 主页（在新标签页打开）">ResearchGate ↗</a>
-              <a class="mini" href="https://scholar.google.de/citations?user=JJ64fp8AAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer" aria-label="周天航的 Google Scholar 谷歌学术主页（在新标签页打开）">Google Scholar ↗</a>
-            </dd>
-            <dt>助教</dt><dd>姜泽坤</dd>
-            <dt>单位</dt><dd>中国石油大学 (北京) 未来能源学院<br>重质油全国重点实验室</dd>
-          </dl>
         </div>
       </div>
 
